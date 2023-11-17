@@ -1,8 +1,8 @@
 import Template from "@/components/template"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { toast } from "react-toastify"
 import { useRouter } from "next/router"
-const Edit = () => {
+const Create = () => {
   const router = useRouter()
   const [NIK, setNIK] = useState("")
   const [namaLengkap, setNamaLengkap] = useState("")
@@ -17,13 +17,14 @@ const Edit = () => {
       return
     }
     const body = JSON.stringify({
+      nikInstruktur: NIK,
       namaLengkap,
       alamatInstruktur: alamat,
       noTelp,
       noRekening
     })
-    const updateQuery = await fetch("https://rpl-backend-production.up.railway.app/v1/instruktur/update/" + router.query.id, {
-      method: "PATCH",
+    const updateQuery = await fetch("https://rpl-backend-production.up.railway.app/v1/instruktur/create", {
+      method: "POST",
       headers: {
         Authorization: token,
         "Content-Type": "application/json"
@@ -35,39 +36,13 @@ const Edit = () => {
       return
     }
     if (updateQuery.status !== 200) {
-      toast.error("Failed to update...")
+      toast.error("Failed to create...")
       return
     }
-    toast.success("Successfully updated!")
+    toast.success("Successfully created!")
     router.push("/instruktur")
     return;
   }
-
-  useEffect(() => {
-    const token = window.localStorage.getItem("token")
-    if (token === undefined || token === null) {
-      window.location.replace("/auth/login")
-      return
-    }
-    fetch("https://rpl-backend-production.up.railway.app/v1/instruktur/list/" + router.query.id, {
-      method: "GET",
-      headers: {
-        "Authorization": token
-      }
-    }).then(async response => {
-      if (response.status !== 200) {
-        toast.error("Failed to retrieve items")
-        return
-      }
-      const responsejson = await response.json()
-      setNIK(responsejson.data.nikInstruktur)
-      setNamaLengkap(responsejson.data.namaLengkap)
-      setAlamat(responsejson.data.alamatInstruktur)
-      setTelp(responsejson.data.noTelp)
-      setRekening(responsejson.data.noRekening)
-    })
-    //eslint-disable-next-line
-  }, [])
   return <>
     <Template>
       <main className="min-h-screen px-14 py-5 bg-[#FFF6F6]">
@@ -85,7 +60,9 @@ const Edit = () => {
         }}>
           <div className="flex flex-row align-middle justify-between">
             <span className="h-min my-auto font-bold text-lg">NIK</span>
-            <input disabled value={NIK} type="tel" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
+            <input value={NIK} onChange={(e) => {
+              setNIK(e.target.value)
+            }} type="tel" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
           </div>
           <div className="flex flex-row align-middle justify-between">
             <span className="h-min my-auto font-bold text-lg">Nama Lengkap</span>
@@ -120,4 +97,4 @@ const Edit = () => {
 
 }
 
-export default Edit
+export default Create
