@@ -1,8 +1,10 @@
 import Template from "@/components/templatenofooter"
 import { toast } from "react-toastify"
 import { useEffect} from "react"
+import { useRouter } from "next/router"
 
 const DashboardOwner = () => {
+    const router = useRouter();
     useEffect(() => {
       const token = window.localStorage.getItem("token")
       if (!token){
