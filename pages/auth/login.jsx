@@ -1,4 +1,3 @@
-import Template from "@/components/template"
 import { useState } from "react"
 import { toast } from "react-toastify"
 import { useRouter } from "next/router"
@@ -9,9 +8,9 @@ const Login = () => {
   const router = useRouter()
 
   return (
-    <main className="min-h-screen flex flex-col align-middle justify-center">
+    <main className="min-h-screen px-14 py-7 bg-[#FFF6F6]">
 
-    <div className="w-[1512px] h-[982px] relative bg-red-50">
+    <div className="w-full mb-2">
       <img className="w-[352px] h-[352px] left-[580px] top-[168px] absolute" src="/logo.png" />
       <div className="w-[693px] h-[124px] left-[409px] top-[106px] absolute text-center text-pink-400 text-[40px] font-extrabold font-'Poppins'">Log In</div>
       <div className="w-[130px] h-[33px] left-[427px] top-[559px] absolute text-pink-400 text-xl font-extrabold font-'Poppins'">Username</div>
@@ -47,18 +46,29 @@ const Login = () => {
           const type = responsejson.data.type
           const token = responsejson.data.token
           localStorage.setItem("token", `${type} ${token}`)
-          window.location.replace("/")
-          return
+
+
+          fetch("https://rpl-backend-production.up.railway.app/v1/auth/verify/" + token) 
+            .then(async (response) => {
+              const responsejson = await response.json();
+              if (responsejson.data.tipe_user === "OWNER"){
+                router.push("/dashboard/owner")
+                return
+              }
+              if (responsejson.data.tipe_user === "ADMIN"){
+                router.push("/dashboard/admin")
+                return
+              }
+            })
+      
         }).catch(() => {
           toast.error("Something went wrong..")
         })
-
-      }} 
-      className="">
-        <input type="text" placeholder=" Username" required className="w-[483px] h-14 left-[602px] top-[536px] absolute bg-white rounded-[15px] shadow border border-red-100" value={username} onChange={(e) => {
+      }} >
+        <input type="text" placeholder=" Username" required className="w-4/12 h-14 left-[602px] top-[536px] absolute bg-white rounded-[15px] p-3 shadow border border-red-100" value={username} onChange={(e) => {
               setUsername(e.target.value)
             }} />
-        <input type="password" placeholder=" Password" required className="w-[483px] h-14 left-[602px] top-[643px] absolute bg-white rounded-[15px] shadow border border-red-100" value={password} onChange={(e) => {
+        <input type="password" placeholder=" Password" required className="w-4/12 h-14 left-[602px] top-[643px] absolute bg-white rounded-[15px] p-3 shadow border border-red-100" value={password} onChange={(e) => {
           setPassword(e.target.value)
         }} />
         <input type="submit" className="w-[252px] h-[55px] left-[630px] top-[750px] absolute w-[252px] h-[55px] left-0 top-0 absolute bg-pink-400 rounded-[15px] w-[168.56px] h-[29.40px] left-[41.72px] top-[11.38px] absolute text-center text-white text-2xl font-bold font-'Poppins'" value ={"Log In"}/>
