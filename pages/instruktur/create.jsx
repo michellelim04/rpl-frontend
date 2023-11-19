@@ -52,7 +52,7 @@ const Create = () => {
             router.push("/")
           }}>Back</span>
         </div>
-        <h1 className="text-[#F875AA] font-extrabold text-5xl mb-20 text-center">Update  Instruktur</h1>
+        <h1 className="text-[#F875AA] font-extrabold text-5xl mb-20 text-center">Create Instruktur</h1>
         <form className="w-2/3 mx-auto space-y-10 flex flex-col align-middle justify-evenly" onSubmit={(e) => {
           e.preventDefault()
           handleUpdate()
