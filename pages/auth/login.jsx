@@ -45,10 +45,10 @@ const Login = () => {
           const responsejson = await response.json();
           const type = responsejson.data.type
           const token = responsejson.data.token
-          localStorage.setItem("token", `${type} ${token}`)
+          window.localStorage.setItem("token", `${type} ${token}`)
 
 
-          fetch("https://rpl-backend-production.up.railway.app/v1/auth/verify/" + token) 
+          fetch("https://rpl-backend-production.up.railway.app/v1/auth/verify/" + token,) 
             .then(async (response) => {
               const responsejson = await response.json();
               if (responsejson.data.tipe_user === "OWNER"){

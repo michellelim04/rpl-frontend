@@ -1,52 +1,28 @@
 import Template from "@/components/templatenofooter"
-import { useState } from "react"
 import { toast } from "react-toastify"
-import { useRouter } from "next/router"
 import { useEffect} from "react"
 
 
 const DashboardOwner = () => {
-    const router = useRouter()
-    // useEffect(() => {
-    //     const token = window.localStorage.getItem("token")
-    //     if (token === undefined || token === null) {
-    //       window.location.replace("/auth/login")
-    //       return
-    //     }
-    //     fetch("https://rpl-backend-production.up.railway.app/v1/auth/verify/" + token) 
-    //     .then(async (response) => {
-    //       const responsejson = await response.json();
-    //       if (responsejson.data.tipe_user !== "OWNER"){
-    //         router.push("/auth/login")
-    //       }
-    //       if (responsejson.data.tipe_user === "OWNER"){
-    //         router.push("/dashboard/owner")
-    //       }
-    //       }
-    //     )
-    //   }, [])
+
     useEffect(() => {
-        const token = window.localStorage.getItem("token")
-        if (token === undefined || token === null) {
-          window.location.replace("/auth/login")
-          
+      const token = window.localStorage.getItem("token")
+      if (!token){
+        window.location.replace("/auth/login")
+      }
+      const tokenParsed = token.split(" ")[1]
+      fetch(`https://rpl-backend-production.up.railway.app/v1/auth/verify/${tokenParsed}`).then(async (response) => {
+        if (response.status !== 200){
+          toast.error("Failed to retrieve items")
+          return;
         }
-        fetch("https://rpl-backend-production.up.railway.app/v1/auth/verify/" + token, {
-          method: "GET",
-          headers: {
-            "Authorization": token
-          }
-        }).then(async response => {
-          if (response.status !== 200) {
-            return null
-          }
-          const responsejson = await response.json()
-          if (responsejson.data.tipe_user !== "owner"){
-            window.location.replace("/auth/login")
-            return
-          }
-        })
-      }, [])
+        const responsejson = await response.json();
+        if (responsejson.data.tipe_user !== "OWNER"){
+          window.location.replace("/auth/login")
+          return
+        }
+      })
+    }, [])
 
     return (
     <Template>

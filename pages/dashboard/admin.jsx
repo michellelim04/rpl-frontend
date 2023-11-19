@@ -1,82 +1,20 @@
 import Template from "@/components/templatenofooter"
 import { toast } from "react-toastify"
 import { useEffect} from "react"
-import { useRouter } from "next/router"
 
 const DashboardOwner = () => {
-  const router = useRouter()
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token")
-  //   if (token === undefined || token === null) {
-  //     window.location.replace("/auth/login")
-  //     return
-  //   }
-  //   fetch("https://rpl-backend-production.up.railway.app/v1/auth/verify/" + token) 
-  //   .then(async (response) => {
-  //     if (response.status !== 200){
-  //       toast.error("Failed to retrieve items")
-  //       window.location.replace("/auth/login")
-  //       return
-  //     }
-  //     const responsejson = await response.json();
-  //     if (responsejson.data.tipe_user !== "ADMIN"){
-  //       router.push("/auth/login")
-  //     }
-  //     if (responsejson.data.tipe_user === "ADMIN"){
-  //       router.push("/dashboard/admin")
-  //     }
-  //     }
-  //   )
-  // }, [])
-  // useEffect(() => {
-    // const token = localStorage.getItem("token");
-    
-    // if (token === undefined || token === null) {
-    //   window.location.replace("/auth/login");
-    //   return;
-    // }
-  
-    // fetch("https://rpl-backend-production.up.railway.app/v1/auth/verify/" + token)
-    //   .then(async (response) => {
-    //     if (response.status !== 200) {
-    //       toast.error("Failed to retrieve items");
-    //       console.error("Failed to verify token:", response);
-    //       window.location.replace("/auth/login");
-    //       return;
-    //     }
-  
-    //     const responseJson = await response.json();
-    //     if (responseJson.data.tipe_user === "ADMIN") {
-    //       router.push("/dashboard/admin");
-    //     } 
-    //     else {
-    //       router.push("/auth/login")
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error during token verification:", error);
-    //     toast.error("Error verifying token");
-    //     window.location.replace("/auth/login");
-    //   });
-    // }, []);
-
     useEffect(() => {
       const token = window.localStorage.getItem("token")
-      if (token === undefined || token === null) {
+      if (!token){
         window.location.replace("/auth/login")
-        return
       }
-      fetch("https://rpl-backend-production.up.railway.app/v1/auth/verify/" + token, {
-        method: "GET",
-        headers: {
-          "Authorization": token
+      const tokenParsed = token.split(" ")[1]
+      fetch(`https://rpl-backend-production.up.railway.app/v1/auth/verify/${tokenParsed}`).then(async (response) => {
+        if (response.status !== 200){
+          toast.error("Failed to retrieve items")
+          return;
         }
-      }).then(async response => {
-        if (response.status !== 200) {
-          // toast.error("Failed to retrieve items")
-          return null
-        }
-        const responsejson = await response.json()
+        const responsejson = await response.json();
         if (responsejson.data.tipe_user !== "ADMIN"){
           window.location.replace("/auth/login")
           return
