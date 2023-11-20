@@ -1,15 +1,24 @@
 import Template from "@/components/template"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { toast } from "react-toastify"
 import { useRouter } from "next/router"
 const Create = () => {
   const router = useRouter()
+  const { kelasID, namaKelas } = router?.state || {};
+  const { isDisabled, setIsDisabled} = useState(false)
   const [nama, setNama] = useState("")
   const [kelasPelanggan, setKelasPelanggan] = useState("")
   const [umur, setUmur] = useState("")
   const [noWA, setNoWA] = useState("")
   const [alamat, setAlamat] = useState("")
   const statusPelanggan = "Calon"
+
+  useEffect(() => {
+    if (router?.location?.state?.kelasID) {
+      setKelasPelanggan(router.location.state.kelasID);
+      setIsDisabled(true);
+    }
+  }, [router?.location?.state?.kelasID]);
 
   const handleUpdate = async () => {
     const body = JSON.stringify({
@@ -39,22 +48,19 @@ const Create = () => {
     router.push("/calonpelanggan")
     return;
   }
-  const token = window.localStorage.getItem("token")
   return <>
     <Template>
       <main className="min-h-screen px-14 py-5 bg-[#FFF6F6]">
         <div className="w-full mb-2">
           <span className="text-[#F875AA] font-bold text-2xl hover:cursor-pointer" onClick={(e) => {
             e.preventDefault()
-            if (token == undefined || token == null) {
-              router.push("/")
-            }
-            else {
-              router.push("/dashboard/admin")
-            }
+            router.back()
           }}>Back</span>
         </div>
         <h1 className="text-[#F875AA] font-extrabold text-5xl mb-20 text-center">Form  Pendaftaran  Kursus  Mengemudi  RPL</h1>
+        <div className="text-[#F875AA] font-extrabold text-5xl mb-20 text-center">{kelasID && (
+          <span> Kelas {namaKelas}</span>)}
+        </div>
         <form className="w-2/3 mx-auto space-y-10 flex flex-col align-middle justify-evenly" onSubmit={(e) => {
           e.preventDefault()
           handleUpdate()
@@ -70,7 +76,7 @@ const Create = () => {
             <span className="h-min my-auto font-bold text-lg">Kelas Pilihan</span>
             <input value={kelasPelanggan} onChange={(e) => {
               setKelasPelanggan(e.target.value)
-            }} type="number" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
+            }} type="number" required disabled={isDisabled} className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
           </div>
           <div className="flex flex-row align-middle justify-between">
             <span className="h-min my-auto font-bold text-lg">Umur</span>

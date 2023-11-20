@@ -1,84 +1,92 @@
 import Template from "@/components/template"
+import { useEffect, useState } from "react"
+import { toast } from "react-toastify"
+import { useRouter } from "next/router"
 
 export default function Home() {
-  return (
+  const router = useRouter();
+  const [kelasmengemudi, setKelasMengemudi] = useState([])
+  const [kelasID, setKelasID] = useState(1)
+  const [namaKelas, setNamaKelas] = useState("")
+  
+  const handleData = () => {
+    router.push({
+      pathname: "/calonpelanggan/create",
+      state: {kelasID, namaKelas},
+    })
+  }
+
+  useEffect(() => {
+    const token = window.localStorage.getItem("token")
+    if (!token){
+      window.location.replace("/auth/login")
+    }
+    const tokenParsed = token.split(" ")[1]
+    fetch(`https://rpl-backend-production.up.railway.app/v1/auth/verify/${tokenParsed}`).then(async (response) => {
+      if (response.status !== 200){
+        toast.error("Failed to retrieve user")
+        return;
+      }
+      const responsejson = await response.json();
+      if (responsejson.data.tipe_user !== "OWNER"){
+        window.location.replace("/auth/login")
+        return
+      }
+    }).catch(error=>{
+      console.error(error)
+      return
+    })
+
+    fetch("https://rpl-backend-production.up.railway.app/v1/kelasmengemudi/list", {
+      method: "GET",
+      headers: {
+        Authorization: token
+      }
+    }).then(async (response) => {
+      if (response.status !== 200){
+        toast.error("Failed to retrieve kelas")
+        return;
+      }
+      const responsejson = await response.json();
+      setKelasMengemudi(responsejson.data)
+
+    }).catch(error=>{
+      console.error(error)
+      return
+    })
+  }, [])
+
+  return <>
     <Template>
       <main className="min-h-screen px-14 py-5 bg-[#FFF6F6]">
         <h1 className="text-[#F875AA] font-extrabold text-4xl mt-5 mb-20 text-center leading-[1.5]">Sistem  Manajemen  Kursus  Mengemudi  RPL</h1>
+                
+        {/* code buat info perusahaan */}
+        
         <div className="flex justify-center items-center">
           <span className="text-[#F875AA] font-extrabold text-3xl text-center">Paket Kelas</span>
         </div>
         
-        <div className="w-[1270px] h-[656px] flex justify-center text-center relative">
-        <div className="w-[317px] h-[271px] left-0 transform top-10 absolute">
-            <div className="w-[317px] h-[271px] left-0 top-0 absolute bg-white rounded-[15px] shadow" />
-            <div className="w-[207px] h-[34px] left-[55px] top-[17px] absolute text-center text-pink-400 text-xl font-extrabold">Barbie’s Dream Drive</div>
-            <div className="w-[207px] h-[49px] left-[58px] top-[85px] absolute text-center text-black text-base font-normal ">Jenis Kendaraan : Manual</div>
-            <div className="w-[207px] h-[49px] left-[51px] top-[125px] absolute text-center text-black text-base font-normal ">Jumlah Sesi : 4</div>
-            <div className="w-[207px] h-8 left-[54px] top-[163px] absolute text-center text-black text-base font-normal ">Harga : Rp650.000</div>
-            <div className="w-[126px] h-[53px] left-[95px] top-[203px] absolute">
-                <div className="w-[126px] h-[53px] left-0 top-0 absolute bg-sky-200 rounded-[15px]" />
-                <div className="w-[84.28px] h-[28.33px] left-[21px] top-[15px] absolute text-center text-black text-base font-bold ">Daftar</div>
-            </div>
+        <div className="overflow-y-auto max-h-calc(100vh - 88px) px-28 mt-10 mx-auto max-w-[1270px] relative grid grid-cols-3 gap-x-8 gap-y-80">
+          {kelasmengemudi.map((row, index) => {
+            return <tr key={row.kelasMengemudiID}>
+            <div className="relative col-span-1 row-span-1 col-start-${(index % 3) + 1} row-start-${Math.floor(index / 3) + 1}">
+              <div className="w-[317px] h-[271px] left-0 top-0 absolute bg-white rounded-[15px] shadow" />
+              <div className="text-center text-[#F875AA] text-xl font-extrabold w-[207px] h-[34px] left-[55px] top-[17px] absolute ']">{row.namaKelas}</div>
+              <div className="w-[207px] h-[49px] left-[58px] top-[85px] absolute text-center text-black text-base']">Jenis Kendaraan : {row.jenisKendaraan}</div>
+              <div className="w-[207px] h-[49px] left-[51px] top-[125px] absolute text-center text-black text-base']">Jumlah Sesi : {row.jumlahSesi}</div>
+              <div className="w-[207px] h-8 left-[54px] top-[163px] absolute text-center text-black text-base']">Harga : Rp{row.hargaKelas}</div>
+              <button onClick={(e) => {
+                e.preventDefault();
+                setKelasID(row.kelasMengemudiID)
+                setNamaKelas(row.namaKelas)
+                handleData()
+              }} className="bg-[#AFDEFC] w-[126px] h-[53px] left-[95px] top-[203px] absolute p-3 text-lg font-bold text-black rounded-2xl">Daftar</button>
+            </div></tr>
+          })}
         </div>
-        <div className="w-[317px] h-[271px] left-[481px] top-10 absolute">
-            <div className="w-[317px] h-[271px] left-0 top-0 absolute bg-white rounded-[15px] shadow" />
-            <div className="w-[239px] h-[34px] left-[41px] top-[12px] absolute text-center text-pink-400 text-xl font-extrabold ">Barbie’s Glamorous Drive</div>
-            <div className="w-[126px] h-[53px] left-[97px] top-[199px] absolute">
-                <div className="w-[126px] h-[53px] left-0 top-0 absolute bg-sky-200 rounded-[15px]" />
-                <div className="w-[84.28px] h-[28.33px] left-[21px] top-[15px] absolute text-center text-black text-base font-bold ">Daftar</div>
-            </div>
-            <div className="w-[207px] h-[49px] left-[60px] top-[81px] absolute text-center text-black text-base font-normal ">Jenis Kendaraan : Manual</div>
-            <div className="w-[207px] h-[49px] left-[53px] top-[121px] absolute text-center text-black text-base font-normal ">Jumlah Sesi : 6</div>
-            <div className="w-[207px] h-8 left-[56px] top-[159px] absolute text-center text-black text-base font-normal ">Harga : Rp900.000</div>
-        </div>
-        <div className="w-[317px] h-[271px] left-[953px] top-10 absolute">
-            <div className="w-[317px] h-[271px] left-0 top-0 absolute bg-white rounded-[15px] shadow" />
-            <div className="w-[244px] h-[30px] left-[37px] top-[13px] absolute text-center text-pink-400 text-xl font-extrabold ">Barbie’s Adventure Roadtrip</div>
-            <div className="w-[126px] h-[53px] left-[96px] top-[199px] absolute">
-                <div className="w-[126px] h-[53px] left-0 top-0 absolute bg-sky-200 rounded-[15px]" />
-                <div className="w-[84.28px] h-[28.33px] left-[21px] top-[15px] absolute text-center text-black text-base font-bold ">Daftar</div>
-            </div>
-            <div className="w-[207px] h-[49px] left-[59px] top-[81px] absolute text-center text-black text-base font-normal ">Jenis Kendaraan : Manual</div>
-            <div className="w-[207px] h-[49px] left-[52px] top-[121px] absolute text-center text-black text-base font-normal ">Jumlah Sesi : 8</div>
-            <div className="w-[207px] h-8 left-[55px] top-[159px] absolute text-center text-black text-base font-normal ">Harga : Rp1.100.000</div>
-        </div>
-        <div className="w-[317px] h-[271px] left-[3px] top-[385px] absolute">
-            <div className="w-[317px] h-[271px] left-0 top-0 absolute bg-white rounded-[15px] shadow" />
-            <div className="w-[232px] h-[34px] left-[39px] top-[16px] absolute text-center text-pink-400 text-xl font-extrabold ">Barbie’s City Chic Driving</div>
-            <div className="w-[207px] h-[49px] left-[51px] top-[90px] absolute text-center text-black text-base font-normal ">Jenis Kendaraan : Manual</div>
-            <div className="w-[207px] h-[49px] left-[44px] top-[130px] absolute text-center text-black text-base font-normal ">Jumlah Sesi : 4</div>
-            <div className="w-[207px] h-8 left-[47px] top-[168px] absolute text-center text-black text-base font-normal ">Harga : Rp750.000</div>
-            <div className="w-[126px] h-[53px] left-[92px] top-[208px] absolute">
-                <div className="w-[126px] h-[53px] left-0 top-0 absolute bg-sky-200 rounded-[15px]" />
-                <div className="w-[84.28px] h-[28.33px] left-[21px] top-[15px] absolute text-center text-black text-base font-bold ">Daftar</div>
-            </div>
-        </div>
-        <div className="w-[317px] h-[271px] left-[481px] top-[385px] absolute">
-            <div className="w-[317px] h-[271px] left-0 top-0 absolute bg-white rounded-[15px] shadow" />
-            <div className="w-[250px] h-[34px] left-[35px] top-[18px] absolute text-center text-pink-400 text-xl font-extrabold ">Barbie's Off-Road Explorer</div>
-            <div className="w-[126px] h-[53px] left-[97px] top-[208px] absolute">
-                <div className="w-[126px] h-[53px] left-0 top-0 absolute bg-sky-200 rounded-[15px]" />
-                <div className="w-[84.28px] h-[28.33px] left-[21px] top-[15px] absolute text-center text-black text-base font-bold ">Daftar</div>
-            </div>
-            <div className="w-[207px] h-[49px] left-[58px] top-[90px] absolute text-center text-black text-base font-normal ">Jenis Kendaraan : Manual</div>
-            <div className="w-[207px] h-[49px] left-[51px] top-[130px] absolute text-center text-black text-base font-normal ">Jumlah Sesi : 6</div>
-            <div className="w-[207px] h-8 left-[54px] top-[168px] absolute text-center text-black text-base font-normal ">Harga : Rp1.000.000</div>
-        </div>
-        <div className="w-[317px] h-[271px] left-[953px] top-[385px] absolute">
-            <div className="w-[317px] h-[271px] left-0 top-0 absolute bg-white rounded-[15px] shadow" />
-            <div className="w-[244px] h-[34px] left-[37px] top-[17px] absolute text-center text-pink-400 text-xl font-extrabold ">Barbie’s Masterclass Drive</div>
-            <div className="w-[126px] h-[53px] left-[96px] top-[208px] absolute">
-                <div className="w-[126px] h-[53px] left-0 top-0 absolute bg-sky-200 rounded-[15px]" />
-                <div className="w-[84.28px] h-[28.33px] left-[21px] top-[15px] absolute text-center text-black text-base font-bold ">Daftar</div>
-            </div>
-            <div className="w-[207px] h-[49px] left-[55px] top-[90px] absolute text-center text-black text-base font-normal ">Jenis Kendaraan : Manual</div>
-            <div className="w-[207px] h-[49px] left-[52px] top-[130px] absolute text-center text-black text-base font-normal ">Jumlah Sesi : 8</div>
-            <div className="w-[207px] h-8 left-[55px] top-[168px] absolute text-center text-black text-base font-normal ">Harga : Rp1.200.000</div>
-        </div>
-</div>
 
       </main>
     </Template>
-  )
+    </>
 }
