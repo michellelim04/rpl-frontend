@@ -22,6 +22,9 @@ const Template = ({ children }) => {
       if (response.status !== 200) return null;
       const responsejson = await response.json();
       setUser(responsejson.data)
+    }).catch(error=>{
+      console.error(error)
+      return
     })
   }, [])
   return <>
