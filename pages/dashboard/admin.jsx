@@ -3,7 +3,7 @@ import { toast } from "react-toastify"
 import { useEffect, useState} from "react"
 import { useRouter } from "next/router"
 
-const DashboardOwner = () => {
+const DashboardAdmin = () => {
     const router = useRouter();
     const [username, setUsername] = useState(null)
 
@@ -25,6 +25,9 @@ const DashboardOwner = () => {
         }
         setUsername(responsejson.data.username)
 
+      }).catch(error=>{
+        console.error(error)
+        return
       })
     }, [])
 
@@ -32,21 +35,19 @@ const DashboardOwner = () => {
     <Template>
 
     <main className="min-h-screen px-14 py-10 bg-[#FFF6F6]">
-  
-    <div className="text-[#F875AA] font-extrabold text-5xl mb-20 text-center">Selamat datang kembali, {username}!</div>
-    <div className = "flex flex-row align-middle justify-between">
-      {/* <div className="bg-white p-6 rounded-lg shadow-md" /> */}
-
+    
+    <div></div>
+    <div className="text-[#F875AA] font-extrabold text-5xl mt-10 mb-20 text-center">Selamat datang kembali, {username}!</div>
+    <div className="w-[515px] h-[462px] absolute bg-white rounded-[15px] shadow left-1/2 transform -translate-x-1/2" />
+    <div className="text-[#F875AA] w-[226px] h-[95px] absolute text-center text-[32px] font-extrabold left-1/2 transform -translate-x-1/2 mt-5">Data<br/>Pelanggan</div>
+    <div className="w-[126px] h-[53px] top-[680px] absolute left-1/2 transform -translate-x-1/2">
+    <button onClick={(e) => {
+      e.preventDefault();
+      router.push("/calonpelanggan")
+      return;
+    }} className="bg-[#AFDEFC] w-[126px] h-[53px] text-lg font-bold text-black rounded-2xl">Ubah</button>
     </div>
-    <div className="w-[226px] h-[95px] left-[638px] top-[381px] absolute text-center text-pink-400 text-[32px] font-extrabold font-'Poppins'">Data<br/>Pelanggan</div>
-    <div className="w-[126px] h-[53px] left-[694px] top-[715px] absolute">
-        <div className="w-[126px] h-[53px] left-0 top-0 absolute bg-sky-200 rounded-[15px]" />
-          <span className="w-[84.28px] h-[28.33px] left-[21px] top-[15px] absolute text-center text-black text-base font-bold font-'Poppins'" onClick={(e) => {
-                  e.preventDefault()
-                  router.push("/")
-                  }}>Ubah</span>  
-    </div>
-    <img className="w-[171px] h-[171px] left-[670px] top-[497px] absolute" src="/client.png" />
+    <img className="w-[171px] h-[171px] absolute transform left-1/2 -translate-x-1/2 mt-40" src="/client.png" />
         </main>
     </Template>
 
@@ -55,4 +56,4 @@ const DashboardOwner = () => {
 
 }
 
-export default DashboardOwner
+export default DashboardAdmin

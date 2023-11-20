@@ -85,11 +85,11 @@ const Index = () => {
         <div className="w-full mb-2">
           <span className="text-[#F875AA] font-bold text-2xl hover:cursor-pointer" onClick={(e) => {
             e.preventDefault()
-            router.push("/")
+            router.push("/dashboard/admin")
           }}>Back</span>
         </div>
         <div className="flex flex-row align-middle justify-between">
-          <h1 className="text-[#F875AA] font-extrabold text-5xl mb-8">Data Calon Pelanggan</h1>
+          <h1 className="text-[#F875AA] font-extrabold text-5xl mb-8">Data  Pelanggan</h1>
           <button onClick={(e) => {
             e.preventDefault();
             router.push("/calonpelanggan/create")

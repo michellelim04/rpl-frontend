@@ -94,7 +94,7 @@ const Edit = () => {
         }}>
           <div className="flex flex-row align-middle justify-between">
             <span className="h-min my-auto font-bold text-lg">ID Pelanggan</span>
-            <span className="h-min my-auto font-bold text-lg">{ID}</span>
+            <input disabled value={ID} type="number" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
           </div>
           <div className="flex flex-row align-middle justify-between">
             <span className="h-min my-auto font-bold text-lg">Nama Siswa</span>

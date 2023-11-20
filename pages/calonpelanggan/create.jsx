@@ -1,5 +1,5 @@
 import Template from "@/components/template"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { toast } from "react-toastify"
 import { useRouter } from "next/router"
 const Create = () => {
@@ -39,13 +39,19 @@ const Create = () => {
     router.push("/calonpelanggan")
     return;
   }
+  const token = window.localStorage.getItem("token")
   return <>
     <Template>
       <main className="min-h-screen px-14 py-5 bg-[#FFF6F6]">
         <div className="w-full mb-2">
           <span className="text-[#F875AA] font-bold text-2xl hover:cursor-pointer" onClick={(e) => {
             e.preventDefault()
-            router.push("/")
+            if (token == undefined || token == null) {
+              router.push("/")
+            }
+            else {
+              router.push("/dashboard/admin")
+            }
           }}>Back</span>
         </div>
         <h1 className="text-[#F875AA] font-extrabold text-5xl mb-20 text-center">Form  Pendaftaran  Kursus  Mengemudi  RPL</h1>
@@ -84,12 +90,6 @@ const Create = () => {
               setAlamat(e.target.value)
             }} type="text" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
           </div>
-          {/* <div className="flex flex-row align-middle justify-between">
-            <span className="h-min my-auto font-bold text-lg">adminKursus</span>
-            <input value={adminKursus} onChange={(e) => {
-              setAdminKursus(e.target.value)
-            }} type="text" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
-          </div> */}
           <input type="submit" className="bg-[#F875AA] px-8 py-3 text-xl font-bold text-white rounded-xl mx-auto" value={"Simpan"} />
         </form>
 
