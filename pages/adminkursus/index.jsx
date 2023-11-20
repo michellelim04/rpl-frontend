@@ -65,7 +65,7 @@ const Index = () => {
       window.location.replace("/auth/login")
       return
     }
-    fetch("https://rpl-backend-production.up.railway.app/v1/adminkursus/list", {
+    fetch("https://rpl-backend-production.up.railway.app/v1/adminkursus/list/", {
       method: "GET",
       headers: {
         "Authorization": token

@@ -71,7 +71,7 @@ const Login = () => {
         <input type="password" placeholder=" Password" required className="w-4/12 h-14 left-[602px] top-[643px] absolute bg-white rounded-[15px] p-3 shadow border border-red-100" value={password} onChange={(e) => {
           setPassword(e.target.value)
         }} />
-        <input type="submit" className="w-[252px] h-[55px] left-[630px] top-[750px] absolute w-[252px] h-[55px] left-0 top-0 absolute bg-pink-400 rounded-[15px] w-[168.56px] h-[29.40px] left-[41.72px] top-[11.38px] absolute text-center text-white text-2xl font-bold font-'Poppins'" value ={"Log In"}/>
+        <input type="submit" className="w-[252px] h-[55px] left-[630px] top-[750px] absolute w-[252px] h-[55px] left-0 top-0 absolute bg-pink-400 rounded-[15px] w-[168.56px] h-[29.40px] left-[41.72px] top-[11.38px] absolute text-center text-white text-2xl font-bold font-'Poppins' hover:cursor-pointer" value ={"Log In"}/>
 
       </form>
     </main>
