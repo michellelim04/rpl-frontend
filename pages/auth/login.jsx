@@ -17,7 +17,7 @@ const Login = () => {
         <button className="text-xl text-[#F875AA] font-extrabold" onClick={handleGoBack}>Back</button>
       </div>
       <div className="flex flex-col w-1/2 align-middle justify-around mx-auto my-auto">
-        <h1 className="text-center font-extrabold text-5xl text-[#F875AA]">Login</h1>
+        <h1 className="text-center font-extrabold text-5xl text-[#F875AA]">Log In</h1>
         <div className="w-full"><Image src={"/logo.png"} width={400} height={400} alt="Main Logo" className="mx-auto"/></div>
     <form className="flex flex-col align-middle justify-evenly space-y-8" onSubmit={(e) => {
         e.preventDefault()
@@ -69,7 +69,7 @@ const Login = () => {
             setPassword(e.target.value)
           }}/>
         </div>
-        <input type="submit" value={"Login"} className="w-min px-20 py-3 mx-auto bg-pink-400  rounded-xl text-white font-bold text-2xl hover:cursor-pointer"/>
+        <input type="submit" value={"Log In"} className="w-min px-20 py-3 mx-auto bg-pink-400  rounded-xl text-white font-bold text-2xl hover:cursor-pointer"/>
       </form>
       
       </div>
