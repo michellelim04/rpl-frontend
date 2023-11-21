@@ -41,6 +41,8 @@ const Template = ({ children }) => {
       </div>
     </header >
     {children}
+    <footer className="bg-[#FFF6F6] p-36">
+    </footer>
   </>
 }
 export default Template
