@@ -57,7 +57,7 @@ const Edit = () => {
       window.location.replace("/auth/login")
       return
     }
-    fetch("https://rpl-backend-production.up.railway.app/v1/kelasmengemudi/list/" + router.query.id, {
+    fetch("https://rpl-backend-production.up.railway.app/v1/kelasmengemudi/list" + router.query.id, {
       method: "GET",
       headers: {
         "Authorization": token
