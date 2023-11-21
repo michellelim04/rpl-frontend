@@ -17,7 +17,7 @@ const Login = () => {
       <div className="w-[58px] h-[27px] left-[72px] top-[48px] absolute text-pink-400 text-xl font-extrabold font-'Poppins'">
         <span className="text-[#F875AA] font-bold text-2xl hover:cursor-pointer" onClick={(e) => {
               e.preventDefault()
-              router.push("/")
+              router.back()
             }}>Back</span>
       </div>
       <div className="w-[130px] h-[33px] left-[427px] top-[654px] absolute text-pink-400 text-xl font-extrabold font-'Poppins'">Password</div>

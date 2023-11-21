@@ -31,8 +31,8 @@ const DashboardOwner = () => {
 
     return (
     <Template>
-      <main className="min-h-screen px-14 py-10 bg-[#FFF6F6]">
-      <div className="w-[1512px] h-[900px] relative bg-[#FFF6F6]"></div>
+      <main className="min-h-screen px-14 py-7 bg-[#FFF6F6]">
+      <div className="w-full mb-10"></div>
         <div className="w-[690px] h-[59px] left-[462px] top-[200px] absolute text-[#F875AA] text-[40px] font-extrabold">Selamat datang kembali, Helmi!</div>
         <div className="w-[317px] h-[271px] left-[168px] top-[341px] absolute bg-white rounded-[15px] shadow" />
         <img className="w-[99px] h-[100px] left-[277px] top-[427px] absolute" src="/todolist.png" />
