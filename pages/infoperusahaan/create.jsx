@@ -19,7 +19,7 @@ const Create = () => {
       noTelp,
       noRekening
     })
-    const updateQuery = await fetch("https://rpl-backend-production.up.railway.app/v1/instruktur/create", {
+    const updateQuery = await fetch("https://rpl-backend-production.up.railway.app/v1/property", {
       method: "POST",
       headers: {
         Authorization: token,
@@ -55,33 +55,9 @@ const Create = () => {
           return;
         }}>
           <div className="flex flex-row align-middle justify-between">
-            <span className="h-min my-auto font-bold text-lg">NIK</span>
+            <span className="h-min my-auto font-bold text-lg">Faq</span>
             <input value={NIK} onChange={(e) => {
               setNIK(e.target.value)
-            }} type="tel" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
-          </div>
-          <div className="flex flex-row align-middle justify-between">
-            <span className="h-min my-auto font-bold text-lg">Nama Lengkap</span>
-            <input value={namaLengkap} onChange={(e) => {
-              setNamaLengkap(e.target.value)
-            }} type="text" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
-          </div>
-          <div className="flex flex-row align-middle justify-between">
-            <span className="h-min my-auto font-bold text-lg">Alamat</span>
-            <input value={alamat} onChange={(e) => {
-              setAlamat(e.target.value)
-            }} type="text" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
-          </div>
-          <div className="flex flex-row align-middle justify-between">
-            <span className="h-min my-auto font-bold text-lg">No Telp</span>
-            <input value={noTelp} onChange={(e) => {
-              setTelp(e.target.value)
-            }} type="tel" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
-          </div>
-          <div className="flex flex-row align-middle justify-between">
-            <span className="h-min my-auto font-bold text-lg">No Rekening</span>
-            <input value={noRekening} onChange={(e) => {
-              setRekening(e.target.value)
             }} type="tel" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
           </div>
           <input type="submit" className="bg-[#F875AA] px-8 py-3 text-xl font-bold text-white rounded-xl mx-auto" value={"Simpan"} />
