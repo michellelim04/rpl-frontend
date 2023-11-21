@@ -1,51 +1,80 @@
-import Template from "@/components/template"
 import { useState } from "react"
 import { toast } from "react-toastify"
+import { useRouter } from "next/router"
+import Image from "next/image"
+
 const Login = () => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
-  return <Template>
-    <main className="min-h-screen flex flex-col align-middle justify-center">
-      <h1 className="font-bold text-center text-3xl mb-5">Temporary login screen...</h1>
-      <h3 className="font-semibold text-center text-xl mb-5">geblek hirup daek jadi runtahhh</h3>
-      <form onSubmit={(e) => {
+  const router = useRouter()
+  const handleGoBack = () => {
+    router.back()
+  }
+
+  return (
+    <main className="min-h-screen px-14 py-7 bg-[#FFF6F6] flex flex-col">
+      <div className="fex flex-row w-full">
+        <button className="text-xl text-[#F875AA] font-extrabold" onClick={handleGoBack}>Back</button>
+      </div>
+      <div className="flex flex-col w-1/2 align-middle justify-around mx-auto my-auto">
+        <h1 className="text-center font-extrabold text-5xl text-[#F875AA]">Log In</h1>
+        <div className="w-full"><Image src={"/logo.png"} width={400} height={400} alt="Main Logo" className="mx-auto"/></div>
+    <form className="flex flex-col align-middle justify-evenly space-y-8" onSubmit={(e) => {
         e.preventDefault()
         const requestBody = JSON.stringify({
-          username, password
+            username,password
         })
         fetch("https://rpl-backend-production.up.railway.app/v1/auth/login", {
-          method: "POST",
-          body: requestBody,
-          headers: {
-            "Content-Type": "application/json"
-          }
-        }).then(async (response) => {
-          if (response.status !== 200) {
-            toast.error("Failed to login..")
-            return
-          }
-          const responsejson = await response.json();
-          const type = responsejson.data.type
-          const token = responsejson.data.token
-          localStorage.setItem("token", `${type} ${token}`)
-          window.location.replace("/")
-          return
-        }).catch(() => {
-          toast.error("Something went wrong..")
-        })
+            method: "POST",
+            body: requestBody,
+            headers: {
+              "Content-Type": "application/json"
+            }
+          }).then(async (response) => {
+            if (response.status !== 200){
+                toast.error("Failed to login..")
+                return
+            }
+            const responsejson = await response.json();
+            const type = responsejson.data.type 
+            const token = responsejson.data.token
+            window.localStorage.setItem("token", `${type} ${token}`)
 
-      }} className="flex flex-col align-middle justify-center w-1/2 bg-slate-300 p-28 mx-auto space-y-2">
-        <input type="text" placeholder="Username" required className="p-2 rounded-xl" value={username} onChange={(e) => {
-          setUsername(e.target.value)
-        }} />
-        <input type="password" placeholder="Password" required className="p-2 rounded-xl" value={password} onChange={(e) => {
-          setPassword(e.target.value)
-        }} />
-        <input type="submit" className="bg-blue-500 w-1/3 p-3 mx-auto rounded-xl font-bold text-white" value={"Login"} />
+            fetch("https://rpl-backend-production.up.railway.app/v1/auth/verify/" + token,)
+                .then(async(response) =>{
+                    const responsejson = await response.json();
+                    if (responsejson.data.tipe_user === "OWNER"){
+                        router.push("/dashboard/owner")
+                        return
+                    }
+                    if (responsejson.data.tipe_user === "ADMIN"){
+                        router.push("/dashboard/admin")
+                        return
+                    }
+            })
+          }).catch(() => {
+            toast.error("Something went wrong..")
+          })
+  
+    }}>
+        <div className="flex flex-row align-middle justify-between ">
+          <span className="h-min my-auto font-extrabold text-[#F875AA] text-xl">Username</span>
+          <input className="w-2/3 drop-shadow-lg p-3 rounded-xl shadow shadow-red-100" type="text" placeholder="Username" required value={username} onChange={(e) => {
+            setUsername(e.target.value)
+          }}/>
+        </div>
+        <div className="flex flex-row align-middle justify-between ">
+          <span className="h-min my-auto font-extrabold text-[#F875AA] text-xl">Password</span>
+          <input className="w-2/3 drop-shadow-lg p-3 rounded-xl shadow shadow-red-100" type="password" placeholder="Password" required value={password} onChange={(e) => {
+            setPassword(e.target.value)
+          }}/>
+        </div>
+        <input type="submit" value={"Log In"} className="w-min px-20 py-3 mx-auto bg-pink-400  rounded-xl text-white font-bold text-2xl hover:cursor-pointer"/>
       </form>
+      
+      </div>
     </main>
-  </Template>
-
+  )
 }
 
 export default Login

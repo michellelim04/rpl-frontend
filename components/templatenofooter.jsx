@@ -22,6 +22,9 @@ const Template = ({ children }) => {
       if (response.status !== 200) return null;
       const responsejson = await response.json();
       setUser(responsejson.data)
+    }).catch(error=>{
+      console.error(error)
+      return
     })
   }, [])
   return <>
@@ -38,19 +41,6 @@ const Template = ({ children }) => {
       </div>
     </header >
     {children}
-    <footer className="bg-[#AEDEFC] p-8 align-middle justify-around flex flex-row font-semibold">
-      <div className="flex flex-col h-min my-auto">
-        <span>Kursus Mengemudi RPL</span>
-        <span>Alamat: Jalan Ganesha no. 100, Bandung</span>
-        <span>No Telepon: (022) 2020202</span>
-      </div>
-      <div className="flex flex-col ">
-        <span>Ikuti Kami:</span>
-        <span>Instagram: @kursusmengemudirpl</span>
-        <span>Website: kursusmengemudirpl.com</span>
-        <span>Facebook: Kursus Mengemudi RPL</span>
-      </div>
-    </footer>
   </>
 }
 export default Template
