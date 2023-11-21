@@ -12,7 +12,7 @@ const Template = ({ children }) => {
   const handleLogout = (e) => {
     e.preventDefault();
     window.localStorage.removeItem("token");
-    window.location.reload();
+    window.location.replace("/");
   }
   useEffect(() => {
     const token = window.localStorage.getItem("token")
