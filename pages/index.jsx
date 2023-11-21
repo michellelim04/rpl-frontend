@@ -3,43 +3,22 @@ import { useEffect, useState } from "react"
 import { toast } from "react-toastify"
 import { useRouter } from "next/router"
 
-export default function Home() {
+export default function Home({ kelasMengemudi, propertyWebsite }) {
   const router = useRouter();
-  const [kelasmengemudi, setKelasMengemudi] = useState([])
-
-  useEffect(() => {
-    fetch("https://rpl-backend-production.up.railway.app/v1/kelasmengemudi/list", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }).then(async (response) => {
-      if (response.status !== 200){
-        toast.error("Failed to retrieve kelas")
-        return;
-      }
-      const responsejson = await response.json();
-      setKelasMengemudi(responsejson.data)
-
-    }).catch(error=>{
-      console.error(error)
-      return
-    })
-  }, [])
 
   return <>
     <Template>
       <main className="min-h-screen px-14 py-5 bg-[#FFF6F6]">
         <h1 className="text-[#F875AA] font-extrabold text-4xl mt-5 mb-20 text-center">Sistem  Manajemen  Kursus  Mengemudi  RPL</h1>
                 
-        {/* code buat info perusahaan */}
+        <p>{propertyWebsite.description}</p>
         
         <div className="flex justify-center items-center">
           <span className="text-[#F875AA] font-extrabold text-3xl text-center">Paket Kelas</span>
         </div>
         
         <div className={`max-h-fit px-28 mt-10 mx-auto max-w-[1270px] relative grid grid-cols-3 gap-x-8 gap-y-80`}>
-          {kelasmengemudi.map((row, index) => {
+          {kelasMengemudi.map((row, index) => {
             return (
             <div key={row.kelasMengemudiID}
             className={`relative col-span-1 row-span-1 col-start-${(index % 3) + 1} row-start-${Math.floor(index / 3) + 1}`}>
@@ -63,9 +42,57 @@ export default function Home() {
           })}
         </div>
 
-        {/* code buat faq */}
+        <div className="flex justify-center items-center">
+          <span className="text-[#F875AA] font-extrabold text-3xl text-center mt-10">Frequently Asked Questions</span>
+        </div>
+
+        <div className="overflow-y-auto max-h-calc(100vh - 88px) px-28 mt-10 mx-auto max-w-[1270px] relative grid grid-cols-3 gap-x-8 gap-y-80">
+          <div>
+            {propertyWebsite.faq.map((item, index) => (
+              <div key={index} className="faq-item">
+                <div className="question">{item.question}</div>
+                <div className="answer">{item.answer}</div>
+              </div>
+            ))}
+          </div>
+        </div>
 
       </main>
     </Template>
     </>
+}
+
+export const getServerSideProps = async () => {
+  const kelasMengemudiQuery = await fetch("https://rpl-backend-production.up.railway.app/v1/kelasmengemudi/list", {
+    method: "GET",
+  }).catch(err => {
+    return null
+  })
+  const propertyQuery = await fetch("https://rpl-backend-production.up.railway.app/v1/property", {
+    method: "GET",
+  }).catch(error => {
+    return null
+  })
+  let kelasMengemudi;
+  if (kelasMengemudiQuery === null) kelasMengemudi = []
+  else {
+    const kelasMengemudiJson = await kelasMengemudiQuery.json()
+    kelasMengemudi = kelasMengemudiJson.data
+  }
+  let propertyWebsite;
+  if (propertyQuery === null) propertyWebsite = {
+    description: "",
+    faq: []
+  }
+  else {
+    const propertyJson = await propertyQuery.json();
+    propertyWebsite = propertyJson.data
+  }
+  return {
+    props: {
+      kelasMengemudi,
+      propertyWebsite
+    }
+  }
+
 }

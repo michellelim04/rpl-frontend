@@ -140,7 +140,7 @@ const Edit = () => {
               setAdminKursus(e.target.value)
             }} type="number" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
           </div>
-          <input type="submit" className="bg-[#F875AA] px-8 py-3 text-xl font-bold text-white rounded-xl mx-auto" value={"Simpan"} />
+          <input type="submit" className="bg-[#F875AA] px-8 py-3 text-xl font-bold text-white rounded-xl mx-auto hover:cursor-pointer" value={"Simpan"} />
         </form>
 
       </main>
