@@ -85,7 +85,7 @@ const Index = () => {
         <div className="w-full mb-2">
           <span className="text-[#F875AA] font-bold text-2xl hover:cursor-pointer" onClick={(e) => {
             e.preventDefault()
-            router.push("/dashboard/admin")
+            router.back()
           }}>Back</span>
         </div>
         <div className="flex flex-row align-middle justify-between">

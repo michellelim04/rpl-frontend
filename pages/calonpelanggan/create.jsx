@@ -4,8 +4,7 @@ import { toast } from "react-toastify"
 import { useRouter } from "next/router"
 const Create = () => {
   const router = useRouter()
-  const { kelasID, namaKelas } = router?.state || {};
-  const { isDisabled, setIsDisabled} = useState(false)
+  const [isDisabled, setIsDisabled] = useState(false)
   const [nama, setNama] = useState("")
   const [kelasPelanggan, setKelasPelanggan] = useState("")
   const [umur, setUmur] = useState("")
@@ -14,11 +13,11 @@ const Create = () => {
   const statusPelanggan = "Calon"
 
   useEffect(() => {
-    if (router?.location?.state?.kelasID) {
-      setKelasPelanggan(router.location.state.kelasID);
+    if (router.query.kelasID !== 1) {
+      setKelasPelanggan(router.query.kelasID);
       setIsDisabled(true);
     }
-  }, [router?.location?.state?.kelasID]);
+  })
 
   const handleUpdate = async () => {
     const body = JSON.stringify({
@@ -58,8 +57,8 @@ const Create = () => {
           }}>Back</span>
         </div>
         <h1 className="text-[#F875AA] font-extrabold text-5xl mb-20 text-center">Form  Pendaftaran  Kursus  Mengemudi  RPL</h1>
-        <div className="text-[#F875AA] font-extrabold text-5xl mb-20 text-center">{kelasID && (
-          <span> Kelas {namaKelas}</span>)}
+        <div className="text-[#F875AA] font-extrabold text-3xl mb-20 text-center">{router.query.kelasID !== 1 && (
+          <span> Kelas {router.query.namaKelas}</span>)}
         </div>
         <form className="w-2/3 mx-auto space-y-10 flex flex-col align-middle justify-evenly" onSubmit={(e) => {
           e.preventDefault()

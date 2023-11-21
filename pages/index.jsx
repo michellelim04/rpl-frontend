@@ -6,15 +6,6 @@ import { useRouter } from "next/router"
 export default function Home() {
   const router = useRouter();
   const [kelasmengemudi, setKelasMengemudi] = useState([])
-  const [kelasID, setKelasID] = useState(1)
-  const [namaKelas, setNamaKelas] = useState("")
-  
-  const handleData = () => {
-    router.push({
-      pathname: "/calonpelanggan/create",
-      state: {kelasID, namaKelas},
-    })
-  }
 
   useEffect(() => {
     const token = window.localStorage.getItem("token")
@@ -78,9 +69,10 @@ export default function Home() {
               <div className="w-[207px] h-8 left-[54px] top-[163px] absolute text-center text-black text-base']">Harga : Rp{row.hargaKelas}</div>
               <button onClick={(e) => {
                 e.preventDefault();
-                setKelasID(row.kelasMengemudiID)
-                setNamaKelas(row.namaKelas)
-                handleData()
+                router.push({
+                  pathname: "/calonpelanggan/create",
+                  query: {kelasID: row.kelasMengemudiID, namaKelas: row.namaKelas},
+                })
               }} className="bg-[#AFDEFC] w-[126px] h-[53px] left-[95px] top-[203px] absolute p-3 text-lg font-bold text-black rounded-2xl">Daftar</button>
             </div></tr>
           })}
