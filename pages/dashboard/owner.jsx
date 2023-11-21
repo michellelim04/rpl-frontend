@@ -61,7 +61,7 @@ const DashboardOwner = () => {
         <div className="w-[126px] h-[53px] left-0 top-0 absolute bg-sky-200 rounded-[15px]" />
         <span className="w-[84.28px] h-[28.33px] left-[21px] top-[15px] absolute text-center text-black text-base font-bold font- hover:cursor-pointer" onClick={(e) => {
                           e.preventDefault()
-                          router.push("/info")
+                          router.push("/property")
                           }}>Ubah</span>  
       </div>
         <div className="w-[317px] h-[271px] left-[358px] top-[694px] absolute bg-white rounded-[15px] shadow" />
