@@ -101,7 +101,7 @@ export default function Home() {
 
         <div className="overflow-y-auto max-h-calc(100vh - 88px) px-28 mt-10 mx-auto max-w-[1270px] relative grid grid-cols-3 gap-x-8 gap-y-80">
           <div>
-              {faq.map((item, index) => (
+              {infoperusahaan.faq.map((item, index) => (
                 <div key={index} className="faq-item">
                   <div className="question">{item.question}</div>
                   <div className="answer">{item.answer}</div>
