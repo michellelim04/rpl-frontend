@@ -13,10 +13,11 @@ export default function Home({ kelasMengemudi, propertyWebsite }) {
 
         <p>{propertyWebsite.description}</p>
 
-        <div className="flex justify-center items-center">
+        <div className="flex flex-col justify-center items-center space-y-5">
           <span className="text-[#F875AA] font-extrabold text-3xl text-center mt-10">Paket Kelas</span>
+          <span className="text-[#16A4FF]">*) Setiap 1 sesi kelas berlangsung selama 2 jam</span>
         </div>
-        
+
         <div className={`max-h-fit px-28 mt-10 mx-auto max-w-[1270px] relative grid grid-cols-3 gap-x-8 gap-y-8`}>
           {kelasMengemudi.map((row, index) => {
             return (
