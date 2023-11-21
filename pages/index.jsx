@@ -10,9 +10,9 @@ export default function Home({ kelasMengemudi, propertyWebsite }) {
     <Template>
       <main className="min-h-screen px-14 py-5 bg-[#FFF6F6]">
         <h1 className="text-[#F875AA] font-extrabold text-4xl mt-5 mb-20 text-center">Sistem  Manajemen  Kursus  Mengemudi  RPL</h1>
-                
+
         <p>{propertyWebsite.description}</p>
-        
+
         <div className="flex justify-center items-center">
           <span className="text-[#F875AA] font-extrabold text-3xl text-center mt-10">Paket Kelas</span>
         </div>
@@ -59,7 +59,7 @@ export default function Home({ kelasMengemudi, propertyWebsite }) {
 
       </main>
     </Template>
-    </>
+  </>
 }
 
 export const getServerSideProps = async () => {
