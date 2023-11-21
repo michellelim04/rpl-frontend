@@ -105,7 +105,7 @@ const Index = () => {
             </tr>
           </thead>
           <tbody>
-            {rows.map((row, index) => {
+            {rows.filter(row => row.user_id !== 10000).map((row, index) => {
               return <tr key={row.user_id}>
                 <td className="p-6 border border-[#F875AA] bg-white">{row.user_id}</td>
                 <td className="p-6 border border-[#F875AA] bg-white">{row.username}</td>
