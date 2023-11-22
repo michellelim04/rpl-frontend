@@ -13,11 +13,12 @@ const Create = () => {
   const statusPelanggan = "Calon"
 
   useEffect(() => {
+    if (!router.isReady) return;
     if (router.query.kelasID) {
       setKelasPelanggan(router.query.kelasID);
       setIsDisabled(true);
     }
-  })
+  }, [router.isReady, router.query.kelasID])
 
   const handleUpdate = async () => {
     const body = JSON.stringify({
@@ -45,18 +46,19 @@ const Create = () => {
     }
     toast.success("Successfully created!")
     const token = window.localStorage.getItem("token")
-    if (!token){
+    if (!token) {
       router.push("/")
       return
     }
     const tokenParsed = token.split(" ")[1]
     fetch(`https://rpl-backend-production.up.railway.app/v1/auth/verify/${tokenParsed}`).then(async (response) => {
       const responsejson = await response.json();
-      if (responsejson.data.tipe_user === "ADMIN"){
+      if (responsejson.data.tipe_user === "ADMIN") {
         router.push("/calonpelanggan")
         return
       }
-    }).catch(error=>{
+      router.push("/")
+    }).catch(error => {
       console.error(error)
       return
     })

@@ -50,6 +50,7 @@ const Edit = () => {
   }
 
   useEffect(() => {
+    if (!router.isReady) return;
     const token = window.localStorage.getItem("token")
     if (token === undefined || token === null) {
       window.location.replace("/auth/login")
@@ -76,7 +77,7 @@ const Edit = () => {
       setAdminKursus(responsejson.data.adminKursus)
     })
     //eslint-disable-next-line
-  }, [])
+  }, [router.isReady])
   return <>
     <Template>
       <main className="min-h-screen px-14 py-5 bg-[#FFF6F6]">
@@ -129,7 +130,8 @@ const Edit = () => {
           <div className="flex flex-row align-middle justify-between">
             <span className="h-min my-auto font-bold text-lg">Status Pelanggan</span>
             <select value={statusPelanggan} onChange={(e) => {
-              setStatusPelanggan(e.target.value)}}>
+              setStatusPelanggan(e.target.value)
+            }}>
               <option value="Calon">Calon</option>
               <option value="Siswa">Siswa</option>
               <option value="Lulus">Lulus</option> </select>
