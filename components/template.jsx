@@ -12,7 +12,7 @@ const Template = ({ children }) => {
   const handleLogout = (e) => {
     e.preventDefault();
     window.localStorage.removeItem("token");
-    window.location.reload();
+    window.location.replace("/");
   }
   useEffect(() => {
     const token = window.localStorage.getItem("token")
@@ -22,6 +22,9 @@ const Template = ({ children }) => {
       if (response.status !== 200) return null;
       const responsejson = await response.json();
       setUser(responsejson.data)
+    }).catch(error => {
+      console.error(error)
+      return
     })
   }, [])
   return <>

@@ -65,7 +65,7 @@ const Index = () => {
       window.location.replace("/auth/login")
       return
     }
-    fetch("https://rpl-backend-production.up.railway.app/v1/adminkursus/list/", {
+    fetch("https://rpl-backend-production.up.railway.app/v1/adminkursus/list", {
       method: "GET",
       headers: {
         "Authorization": token
@@ -85,7 +85,7 @@ const Index = () => {
         <div className="w-full mb-2">
           <span className="text-[#F875AA] font-bold text-2xl hover:cursor-pointer" onClick={(e) => {
             e.preventDefault()
-            router.back()
+            router.replace("/dashboard/owner")
           }}>Back</span>
         </div>
         <div className="flex flex-row align-middle justify-between">
@@ -105,7 +105,7 @@ const Index = () => {
             </tr>
           </thead>
           <tbody>
-            {rows.map((row, index) => {
+            {rows.filter(row => row.user_id !== 10000).map((row, index) => {
               return <tr key={row.user_id}>
                 <td className="p-6 border border-[#F875AA] bg-white">{row.user_id}</td>
                 <td className="p-6 border border-[#F875AA] bg-white">{row.username}</td>
