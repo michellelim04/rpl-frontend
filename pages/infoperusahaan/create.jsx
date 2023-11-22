@@ -4,7 +4,10 @@ import { toast } from "react-toastify"
 import { useRouter } from "next/router"
 const Create = ({ propertyWebsite }) => {
   const router = useRouter()
-  const[faq, setFaq] = useState([])
+  const [faq, setFaq] = useState({
+    question: "",
+    answer: ""
+  })
 
 
   const handleUpdate = async () => {
@@ -14,7 +17,8 @@ const Create = ({ propertyWebsite }) => {
       return
     }
     const body = JSON.stringify({
-      faq
+      question: faq.question,
+      answer: faq.answer
     })
     const updateQuery = await fetch("https://rpl-backend-production.up.railway.app/v1/property/faq", {
       method: "PUT",
@@ -33,7 +37,7 @@ const Create = ({ propertyWebsite }) => {
       return
     }
     toast.success("Successfully created!")
-    router.push("/info")
+    router.push("/infoperusahaan")
     return;
   }
   return <>
@@ -42,7 +46,7 @@ const Create = ({ propertyWebsite }) => {
         <div className="w-full mb-2">
           <span className="text-[#F875AA] font-bold text-2xl hover:cursor-pointer" onClick={(e) => {
             e.preventDefault()
-            router.push("/info")
+            router.push("/infoperusahaan")
           }}>Back</span>
         </div>
         <h1 className="text-[#F875AA] font-extrabold text-5xl mb-20 text-center">Tambah Data FAQ</h1>
@@ -54,13 +58,19 @@ const Create = ({ propertyWebsite }) => {
           <div className="flex flex-row align-middle justify-between">
             <span className="h-min my-auto font-bold text-lg">Question</span>
             <input value={faq.question} onChange={(e) => {
-              setFaq(e.target.value)
+              setFaq({
+                question: e.target.value,
+                answer: faq.answer
+              })
             }} type="tel" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
           </div>
           <div className="flex flex-row align-middle justify-between">
             <span className="h-min my-auto font-bold text-lg">Answer</span>
             <input value={faq.answer} onChange={(e) => {
-              setFaq(e.target.value)
+              setFaq({
+                question: faq.question,
+                answer: e.target.value
+              })
             }} type="text" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
           </div>
           <input type="submit" className="bg-[#F875AA] px-8 py-3 text-xl font-bold text-white rounded-xl mx-auto" value={"Simpan"} />
