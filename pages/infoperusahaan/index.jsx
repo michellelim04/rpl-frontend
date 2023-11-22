@@ -87,12 +87,15 @@ export default function InformasiPerusahaan({ propertyWebsite }) {
           <h1 className="text-[#F875AA] font-extrabold text-3xl mt-10 mb-10 text-lef ml-3">Deskripsi Perusahaan</h1>
         </div>
         <div className="flex flex-row align-middle justify-between">
-          <input value={deskripsi} onChange={(e) => {
+          <textarea rows="4" style={{resize: "vertical"}} value={deskripsi} onChange={(e) => {
             setDeskripsi(e.target.value)
-          }} type="text" required className="drop-shadow-xl w-5/6 p-2 rounded-xl" rows="4" />
+          }} type="text" required className="drop-shadow-xl w-5/6 p-2 rounded-xl"/>
           <button className="px-9 h-12 rounded bg-[#FFDFDF] border-2 border-[#F875AA]" onClick={() => {
             saveDeskripsi()
           }}>Simpan</button>
+        </div>
+        <div>
+          <span className="text-[#16A4FF]">*) Minimum 10 karakter, maksimal 500 karakter</span>
         </div>
         <div className="flex flex-row items-center align-middle justify-between">
           <h1 className="text-[#F875AA] font-extrabold text-3xl mt-10 mb-10 ml-3">Frequently Asked Questions</h1>
@@ -113,16 +116,16 @@ export default function InformasiPerusahaan({ propertyWebsite }) {
           </thead>
           <tbody>
             {faq.map((item, index) => {
-              return <tr key={index} className="items-center">
+              return <tr key={index}>
                 <td className="p-6 border border-[#F875AA] bg-white">{item.question}</td>
                 <td className="p-6 border border-[#F875AA] bg-white">{item.answer}</td>
-                <td className="px-2 flex flex-col align-middle justify-center space-y-2 ">
-                  <button className="bg-[#AEDEFC] p-1 rounded-lg" onClick={(e) => {
+                <td className="p-6 flex flex-col align-middle justify-evenly space-y-2 ">
+                  <button className="bg-[#AEDEFC] p-3 rounded-lg" onClick={(e) => {
                     e.preventDefault();
                     router.push("/infoperusahaan/edit/" + index)
                     return;
                   }}>Update</button>
-                  <button data-modal-target="popup-modal" data-modal-toggle="popup-modal" className="bg-[#FFDFDF] p-1 rounded-lg" onClick={(e) => {
+                  <button data-modal-target="popup-modal" data-modal-toggle="popup-modal" className="bg-[#FFDFDF] p-3 rounded-lg" onClick={(e) => {
                     e.preventDefault()
                     setDeleteToggle(index)
                   }}>Delete</button>
