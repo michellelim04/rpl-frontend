@@ -123,7 +123,7 @@ const Edit = () => {
             }} type="tel" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
           </div>
           <div className="flex flex-row align-middle justify-between">
-            <span className="h-min my-auto font-bold text-lg">Instruktur</span>
+            <span className="h-min my-auto font-bold text-lg">NIK Instruktur</span>
             <input value={instruktur} onChange={(e) => {
               setInstruktur(e.target.value)
             }} type="tel" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
