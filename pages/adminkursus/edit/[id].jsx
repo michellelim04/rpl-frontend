@@ -70,7 +70,7 @@ const Edit = () => {
         <div className="w-full mb-2">
           <span className="text-[#F875AA] font-bold text-2xl hover:cursor-pointer" onClick={(e) => {
             e.preventDefault()
-            router.back("/adminkursus")
+            router.replace("/adminkursus")
           }}>Back</span>
         </div>
         <h1 className="text-[#F875AA] font-extrabold text-5xl mb-20 text-center">Update  Admin Kursus</h1>

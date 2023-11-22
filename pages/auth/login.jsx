@@ -12,7 +12,7 @@ const Login = () => {
     <main className="min-h-screen px-14 py-7 bg-[#FFF6F6] flex flex-col">
       <div className="fex flex-row w-full">
         <button className="text-xl text-[#F875AA] font-extrabold" onClick={
-              ()=>window.location.replace("/")}>Back</button>
+              ()=>router.replace("/")}>Back</button>
       </div>
       <div className="flex flex-col w-1/2 align-middle justify-around mx-auto my-auto">
         <h1 className="text-center font-extrabold text-5xl text-[#F875AA]">Log In</h1>
