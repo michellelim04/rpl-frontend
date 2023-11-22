@@ -1,50 +1,8 @@
 import Template from "@/components/template"
-import { useEffect, useState } from "react"
-import { toast } from "react-toastify"
 import { useRouter } from "next/router"
 
 export default function Home({ kelasMengemudi, propertyWebsite }) {
   const router = useRouter();
-  useEffect(() => {
-    const token = window.localStorage.getItem("token")
-    if (!token) {
-      window.location.replace("/auth/login")
-    }
-    const tokenParsed = token.split(" ")[1]
-    fetch(`https://rpl-backend-production.up.railway.app/v1/auth/verify/${tokenParsed}`).then(async (response) => {
-      if (response.status !== 200) {
-        toast.error("Failed to retrieve user")
-        return;
-      }
-      const responsejson = await response.json();
-      if (responsejson.data.tipe_user !== "OWNER") {
-        window.location.replace("/auth/login")
-        return
-      }
-    }).catch(error => {
-      console.error(error)
-      return
-    })
-
-    fetch("https://rpl-backend-production.up.railway.app/v1/kelasmengemudi/list", {
-      method: "GET",
-      headers: {
-        Authorization: token
-      }
-    }).then(async (response) => {
-      if (response.status !== 200) {
-        toast.error("Failed to retrieve kelas")
-        return;
-      }
-      const responsejson = await response.json();
-      setKelasMengemudi(responsejson.data)
-
-    }).catch(error => {
-      console.error(error)
-      return
-    })
-  }, [])
-
   return <>
     <Template>
       <main className="min-h-screen px-14 py-5 bg-[#FFF6F6]">
