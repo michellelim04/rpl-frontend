@@ -9,12 +9,12 @@ export default function Home({ kelasMengemudi, propertyWebsite }) {
   return <>
     <Template>
       <main className="min-h-screen px-14 py-5 bg-[#FFF6F6]">
-        <h1 className="text-[#F875AA] font-extrabold text-4xl mt-5 mb-20 text-center">Sistem  Manajemen  Kursus  Mengemudi  RPL</h1>
+        <h1 className="text-[#F875AA] font-extrabold text-4xl mt-5 mb-10 text-center">Sistem  Manajemen  Kursus  Mengemudi  RPL</h1>
 
-        <p>{propertyWebsite.description}</p>
+        <p className="mx-auto w-11/12 justify-center text-center">{propertyWebsite.description}</p>
 
         <div className="flex flex-col justify-center items-center space-y-5">
-          <span className="text-[#F875AA] font-extrabold text-3xl text-center mt-10">Paket Kelas</span>
+          <span className="text-[#F875AA] font-extrabold text-3xl text-center mt-20">Paket Kelas</span>
           <span className="text-[#16A4FF]">*) Setiap 1 sesi kelas berlangsung selama 2 jam</span>
         </div>
 
@@ -23,7 +23,7 @@ export default function Home({ kelasMengemudi, propertyWebsite }) {
             return (
             <div key={row.kelasMengemudiID}
             className={`relative col-span-1 row-span-1 col-start-${(index % 3) + 1} row-start-${Math.floor(index / 3) + 1}`}>
-              <div className="w-[320px] h-[360px] bg-white rounded-[15px] shadow relative flex flex-col justify-center items-center">
+              <div className="w-[320px] h-[360px] bg-white rounded-[15px] shadow-xl shadow-[#FFDFE0] relative flex flex-col justify-center items-center">
                 <span className="text-[#F875AA] text-xl font-extrabold">{row.namaKelas}</span>
                 <span className="text-center text-black text-base mt-8">Harga: Rp{row.hargaKelas}</span>
                 <span className="text-center text-black text-base mt-3">Total Jam Kursus: {2*row.jumlahSesi}</span>
@@ -44,15 +44,17 @@ export default function Home({ kelasMengemudi, propertyWebsite }) {
         </div>
 
         <div className="flex justify-center items-center">
-          <span className="text-[#F875AA] font-extrabold text-3xl text-center mt-10">Frequently Asked Questions</span>
+          <span className="text-[#F875AA] font-extrabold text-3xl text-center mt-20">Frequently Asked Questions</span>
         </div>
 
-        <div className="overflow-y-auto max-h-calc(100vh - 88px) px-28 mt-10 mx-auto max-w-[1270px] relative grid grid-cols-3 gap-x-8 gap-y-80">
+        <div className="mt-10 mb-20 mx-auto relative space-y-10">
           <div>
             {propertyWebsite.faq.map((item, index) => (
               <div key={index} className="faq-item">
-                <div className="question">{item.question}</div>
-                <div className="answer">{item.answer}</div>
+                <div className="mx-auto w-[1270px] h-auto bg-white rounded-[15px] shadow-xl shadow-[#FFDFE0] relative flex flex-col justify-center mb-5">
+                  <span className="question text-[#F875AA] text-xl font-bold text-left m-5">{item.question}</span>
+                  <span className="answer ml-5 mb-5">{item.answer}</span>
+                </div>
               </div>
             ))}
           </div>

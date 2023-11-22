@@ -36,7 +36,7 @@ const DashboardAdmin = () => {
     <Template>
       <main className="min-h-screen p-28 flex flex-col align-middle justify-center bg-[#FFF6F6] space-y-20">
         <h1 className="text-5xl text-center font-extrabold text-[#F875AA]">Selamat datang kembali, {username}</h1>
-            <div className="bg-white rounded-xl p-10 space-y-14 flex flex-col align-middle justify-evenly shadow-xl w-1/3 mx-auto">
+            <div className="bg-white rounded-xl p-10 space-y-14 flex flex-col align-middle justify-evenly shadow-xl shadow-[#FFDFE0] w-1/3 mx-auto">
               <span className="text-center font-bold text-4xl text-[#F875AA]">Data <br></br>Pelanggan</span>
               <Image className="mx-auto" src="/client.png" width={126} height={53} alt="Data Kelas" />
               <button onClick={(e) => {
