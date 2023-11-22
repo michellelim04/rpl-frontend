@@ -97,9 +97,11 @@ const Edit = () => {
           </div>
           <div className="flex flex-row align-middle justify-between">
             <span className="h-min my-auto font-bold text-lg">Jenis Transmisi Kendaraan</span>
-            <select disabled value={statusKetersediaan}>
-                <option value="MATIC">Matic</option>
-                <option value="MANUAL">Manual</option>
+            <select disabled value={jenisTransmisi} onChange={(e) => {
+              setJenisTransmisi(e.target.value)
+            }}>
+              <option value="MATIC">Matic</option>
+              <option value="MANUAL">Manual</option>
             </select>
           </div>
           <div className="flex flex-row align-middle justify-between">
@@ -112,26 +114,24 @@ const Edit = () => {
             <span className="h-min my-auto font-bold text-lg">Tanggal Terakhir Service Kendaraan</span>
             <input value={tanggalTerakhirService} onChange={(e) => {
               setTanggalTerakhirService(e.target.value)
-            }} type="text" required className="drop-shadow-xl w-2/4 p-2 rounded-xl" />
-          </div>
-          <div className="flex flex-row align-middle justify-between">
-            <span className="h-min my-auto font-bold text-lg">Tanggal Terakhir Service Kendaraan</span>
-            <input value={tanggalTerakhirService} onChange={(e) => {
-              setTanggalTerakhirService(e.target.value)
-            }} type="text" required className="drop-shadow-xl w-2/4 p-2 rounded-xl" />
+            }} type="date" className="drop-shadow-xl w-2/4 p-2 rounded-xl" />
           </div>
           <div className="flex flex-row align-middle justify-between">
             <span className="h-min my-auto font-bold text-lg">Status Ketersediaan Kendaraan</span>
-            <select value={statusKetersediaan}>
-                <option value="AVAILABLE">Available</option>
-                <option value="IN USE">In Use</option>
+            <select value={statusKetersediaan} onChange={(e) => {
+              setStatusKetersediaan(e.target.value)
+            }}>
+              <option value="AVAILABLE">Available</option>
+              <option value="IN USE">In Use</option>
             </select>
           </div>
           <div className="flex flex-row align-middle justify-between">
             <span className="h-min my-auto font-bold text-lg">Status Service Kendaraan</span>
-            <select value={statusKetersediaan}>
-                <option value="SERVICE">Service</option>
-                <option value="READY">Ready</option>
+            <select value={statusKendaraan} onChange={(e) => {
+              setStatusKendaraan(e.target.value)
+            }}>
+              <option value="SERVICE">Service</option>
+              <option value="READY">Ready</option>
             </select>
           </div>
           <input type="submit" className="bg-[#F875AA] px-8 py-3 text-xl font-bold text-white rounded-xl mx-auto" value={"Simpan"} />
