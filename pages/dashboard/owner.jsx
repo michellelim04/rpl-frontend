@@ -51,7 +51,7 @@ const DashboardOwner = () => {
             <span className="text-center font-extrabold text-xl text-[#F875AA]">Info Perusahaan dan FAQ</span>
             <Image className="mx-auto" src="/briefcase.png" width={108} height={108} alt="Data Kelas" />
             <button className="bg-sky-200 rounded-xl font-bold text-center w-min mx-auto px-10 py-3"onClick={
-              ()=>router.push("/properties")}>Ubah</button>
+              ()=>router.push("/infoperusahaan")}>Ubah</button>
           </div>
 
         </div>
