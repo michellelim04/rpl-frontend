@@ -7,14 +7,12 @@ const Login = () => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const router = useRouter()
-  const handleGoBack = () => {
-    router.back()
-  }
 
   return (
     <main className="min-h-screen px-14 py-7 bg-[#FFF6F6] flex flex-col">
       <div className="fex flex-row w-full">
-        <button className="text-xl text-[#F875AA] font-extrabold" onClick={handleGoBack}>Back</button>
+        <button className="text-xl text-[#F875AA] font-extrabold" onClick={
+              ()=>router.replace("/")}>Back</button>
       </div>
       <div className="flex flex-col w-1/2 align-middle justify-around mx-auto my-auto">
         <h1 className="text-center font-extrabold text-5xl text-[#F875AA]">Log In</h1>
@@ -59,13 +57,13 @@ const Login = () => {
     }}>
         <div className="flex flex-row align-middle justify-between ">
           <span className="h-min my-auto font-extrabold text-[#F875AA] text-xl">Username</span>
-          <input className="w-2/3 drop-shadow-lg p-3 rounded-xl shadow shadow-red-100" type="text" placeholder="Username" required value={username} onChange={(e) => {
+          <input className="w-2/3 drop-shadow-lg p-3 rounded-xl shadow shadow-[#FFDFE0]" type="text" placeholder="Username" required value={username} onChange={(e) => {
             setUsername(e.target.value)
           }}/>
         </div>
         <div className="flex flex-row align-middle justify-between ">
           <span className="h-min my-auto font-extrabold text-[#F875AA] text-xl">Password</span>
-          <input className="w-2/3 drop-shadow-lg p-3 rounded-xl shadow shadow-red-100" type="password" placeholder="Password" required value={password} onChange={(e) => {
+          <input className="w-2/3 drop-shadow-lg p-3 rounded-xl shadow shadow-[#FFDFE0]" type="password" placeholder="Password" required value={password} onChange={(e) => {
             setPassword(e.target.value)
           }}/>
         </div>

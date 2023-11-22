@@ -70,7 +70,7 @@ const Edit = () => {
         <div className="w-full mb-2">
           <span className="text-[#F875AA] font-bold text-2xl hover:cursor-pointer" onClick={(e) => {
             e.preventDefault()
-            router.back()
+            router.replace("/adminkursus")
           }}>Back</span>
         </div>
         <h1 className="text-[#F875AA] font-extrabold text-5xl mb-20 text-center">Update  Admin Kursus</h1>
@@ -87,13 +87,13 @@ const Edit = () => {
             <span className="h-min my-auto font-bold text-lg">Username</span>
             <input value={username} onChange={(e) => {
               setusername(e.target.value)
-            }} type="text" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
+            }} type="text"  className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
           </div>
           <div className="flex flex-row align-middle justify-between">
             <span className="h-min my-auto font-bold text-lg">Password</span>
             <input value={password} onChange={(e) => {
               setpassword(e.target.value)
-            }} type="password" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
+            }} type="password"  className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
           </div>
 
           <input type="submit" className="bg-[#F875AA] px-8 py-3 text-xl font-bold text-white rounded-xl mx-auto" value={"Simpan"} />
