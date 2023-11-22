@@ -59,13 +59,13 @@ const Login = () => {
     }}>
         <div className="flex flex-row align-middle justify-between ">
           <span className="h-min my-auto font-extrabold text-[#F875AA] text-xl">Username</span>
-          <input className="w-2/3 drop-shadow-lg p-3 rounded-xl shadow shadow-red-100" type="text" placeholder="Username" required value={username} onChange={(e) => {
+          <input className="w-2/3 drop-shadow-lg p-3 rounded-xl shadow shadow-[#FFDFE0]" type="text" placeholder="Username" required value={username} onChange={(e) => {
             setUsername(e.target.value)
           }}/>
         </div>
         <div className="flex flex-row align-middle justify-between ">
           <span className="h-min my-auto font-extrabold text-[#F875AA] text-xl">Password</span>
-          <input className="w-2/3 drop-shadow-lg p-3 rounded-xl shadow shadow-red-100" type="password" placeholder="Password" required value={password} onChange={(e) => {
+          <input className="w-2/3 drop-shadow-lg p-3 rounded-xl shadow shadow-[#FFDFE0]" type="password" placeholder="Password" required value={password} onChange={(e) => {
             setPassword(e.target.value)
           }}/>
         </div>
