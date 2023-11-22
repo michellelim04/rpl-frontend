@@ -8,9 +8,8 @@ const Edit = () => {
   const [namaKelas, setNamaKelas] = useState("")
   const [hargaKelas, setHargaKelas] = useState("")
   const [jenisKendaraan, setJenisKendaraan] = useState("")
-  const [totalJamKursus, setTotalJamKursus] = useState("")
+  const [totalJamKursus, setTotalJamKursus] = useState()
   const [jumlahSesi, setJumlahSesi] = useState("")
-  const [instruktur, setInstruktur] = useState("")
   const [nomorKendaraan, setNomorKendaraan] = useState("")
   const [namaKendaraan, setNamaKendaraan] = useState("")
 
@@ -24,9 +23,7 @@ const Edit = () => {
       namaKelas,
       hargaKelas,
       jenisKendaraan,
-      totalJamKursus,
       jumlahSesi,
-      instruktur,
       nomorKendaraan,
       namaKendaraan
     })
@@ -123,16 +120,13 @@ const Edit = () => {
             }} type="tel" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
           </div>
           <div className="flex flex-row align-middle justify-between">
-            <span className="h-min my-auto font-bold text-lg">NIK Instruktur</span>
-            <input value={instruktur} onChange={(e) => {
-              setInstruktur(e.target.value)
-            }} type="tel" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
-          </div>
-          <div className="flex flex-row align-middle justify-between">
             <span className="h-min my-auto font-bold text-lg">Jenis Kendaraan</span>
-            <input value={jenisKendaraan} onChange={(e) => {
+            <select disabled value={jenisKendaraan} onChange={(e) => {
               setJenisKendaraan(e.target.value)
-            }} type="tel" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
+            }}>
+              <option value="MATIC">Matic</option>
+              <option value="MANUAL">Manual</option>
+            </select>
           </div>
           <div className="flex flex-row align-middle justify-between">
             <span className="h-min my-auto font-bold text-lg">Nomor Kendaraan</span>
