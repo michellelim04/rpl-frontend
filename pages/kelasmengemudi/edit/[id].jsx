@@ -71,7 +71,6 @@ const Edit = () => {
       setJenisKendaraan(responsejson.data.jenisKendaraan)
       setTotalJamKursus(responsejson.data.totalJamKursus)
       setJumlahSesi(responsejson.data.jumlahSesi)
-      setInstruktur(responsejson.data.instruktur)
       setNomorKendaraan(responsejson.data.kendaraan)
       setNamaKendaraan(responsejson.data.calonPelanggan)
     })
