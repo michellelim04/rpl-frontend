@@ -51,9 +51,9 @@ export default function Home({ kelasMengemudi, propertyWebsite }) {
           <div>
             {propertyWebsite.faq.map((item, index) => (
               <div key={index} className="faq-item">
-                <div className="mx-auto w-[1270px] h-auto bg-white rounded-[15px] shadow-xl shadow-[#FFDFE0] relative flex flex-col justify-center mb-5">
+                <div className="mx-auto w-11/12 h-auto bg-white rounded-[15px] shadow-xl shadow-[#FFDFE0] relative flex flex-col justify-center mb-5">
                   <span className="question text-[#F875AA] text-xl font-bold text-left m-5">{item.question}</span>
-                  <span className="answer ml-5 mb-5">{item.answer}</span>
+                  <span className="answer ml-5 mb-5 mr-5">{item.answer}</span>
                 </div>
               </div>
             ))}
