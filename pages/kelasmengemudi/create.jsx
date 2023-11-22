@@ -102,13 +102,13 @@ const Create = () => {
           </div>
           <div className="flex flex-row align-middle justify-between">
             <span className="h-min my-auto font-bold text-lg">Nomor Kendaraan</span>
-            <input value={kendaraan} onChange={(e) => {
+            <input value={nomorKendaraan} onChange={(e) => {
               setNomorKendaraan(e.target.value)
             }} type="tel" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
           </div>
           <div className="flex flex-row align-middle justify-between">
             <span className="h-min my-auto font-bold text-lg">Nama Kendaraan</span>
-            <input value={kendaraan} onChange={(e) => {
+            <input value={namaKendaraan} onChange={(e) => {
               setNamaKendaraan(e.target.value)
             }} type="tel" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
           </div>
