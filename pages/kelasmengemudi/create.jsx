@@ -8,7 +8,7 @@ const Create = () => {
   const [hargaKelas, setHargaKelas] = useState("")
   const [jenisKendaraan, setJenisKendaraan] = useState("")
   const [jumlahSesi, setJumlahSesi] = useState("")
-  const [nomorKendaraan, setNomorKendaraan] = useState("")
+  const [platNomorKendaraan, setPlatNomorKendaraan] = useState("")
   const [namaKendaraan, setNamaKendaraan] = useState("")
 
   const handleUpdate = async () => {
@@ -22,7 +22,7 @@ const Create = () => {
         hargaKelas,
         jenisKendaraan,
         jumlahSesi,
-        nomorKendaraan,
+        platNomorKendaraan,
         namaKendaraan
     })
     const updateQuery = await fetch("https://rpl-backend-production.up.railway.app/v1/kelasmengemudi/create", {
@@ -70,7 +70,7 @@ const Create = () => {
             <span className="h-min my-auto font-bold text-lg">Harga Kelas</span>
             <input value={hargaKelas} onChange={(e) => {
               setHargaKelas(e.target.value)
-            }} type="text" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
+            }} type="number" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
           </div>
           <div className="flex flex-row align-middle justify-between">
             <span className="h-min my-auto font-bold text-lg">Jenis Kendaraan</span>
@@ -85,19 +85,19 @@ const Create = () => {
             <span className="h-min my-auto font-bold text-lg">Jumlah Sesi</span>
             <input value={jumlahSesi} onChange={(e) => {
               setJumlahSesi(e.target.value)
-            }} type="tel" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
+            }} type="number" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
           </div>
           <div className="flex flex-row align-middle justify-between">
-            <span className="h-min my-auto font-bold text-lg">Nomor Kendaraan</span>
-            <input value={nomorKendaraan} onChange={(e) => {
-              setNomorKendaraan(e.target.value)
-            }} type="tel" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
+            <span className="h-min my-auto font-bold text-lg">Plat Nomor Kendaraan</span>
+            <input value={platNomorKendaraan} onChange={(e) => {
+              setPlatNomorKendaraan(e.target.value)
+            }} type="text" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
           </div>
           <div className="flex flex-row align-middle justify-between">
             <span className="h-min my-auto font-bold text-lg">Nama Kendaraan</span>
             <input value={namaKendaraan} onChange={(e) => {
               setNamaKendaraan(e.target.value)
-            }} type="tel" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
+            }} type="text" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
           </div>
 
           <input type="submit" className="bg-[#F875AA] px-8 py-3 text-xl font-bold text-white rounded-xl mx-auto" value={"Simpan"} />
