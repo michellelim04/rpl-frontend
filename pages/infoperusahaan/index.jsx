@@ -117,8 +117,8 @@ export default function InformasiPerusahaan({ propertyWebsite }) {
           <tbody>
             {faq.map((item, index) => {
               return <tr key={index}>
-                <td className="p-6 border border-[#F875AA] bg-white">{item.question}</td>
-                <td className="p-6 border border-[#F875AA] bg-white">{item.answer}</td>
+                <td className="p-2 border border-[#F875AA] bg-white">{item.question}</td>
+                <td className="p-2 border border-[#F875AA] bg-white">{item.answer}</td>
                 <td className="px-2 mx-auto flex flex-col align-middle justify-evenly space-y-2">
                   <button className="bg-[#AEDEFC] p-3 rounded-lg" onClick={(e) => {
                     e.preventDefault();
