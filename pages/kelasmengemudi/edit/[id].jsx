@@ -7,7 +7,7 @@ const Edit = () => {
   const [ID, setID] = useState()
   const [namaKelas, setNamaKelas] = useState("")
   const [hargaKelas, setHargaKelas] = useState("")
-  const [jenisKendaraan, setJenisKendaraan] = useState("")
+  const [jenisKendaraan, setJenisKendaraan] = useState("MATIC")
   const [totalJamKursus, setTotalJamKursus] = useState()
   const [jumlahSesi, setJumlahSesi] = useState("")
   const [platNomorKendaraan, setPlatNomorKendaraan] = useState("")
