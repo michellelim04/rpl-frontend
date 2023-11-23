@@ -6,7 +6,7 @@ const Create = () => {
   const router = useRouter()
   const [namaKelas, setNamaKelas] = useState("")
   const [hargaKelas, setHargaKelas] = useState("")
-  const [jenisKendaraan, setJenisKendaraan] = useState("")
+  const [jenisKendaraan, setJenisKendaraan] = useState("MATIC")
   const [jumlahSesi, setJumlahSesi] = useState("")
   const [platNomorKendaraan, setPlatNomorKendaraan] = useState("")
   const [namaKendaraan, setNamaKendaraan] = useState("")
