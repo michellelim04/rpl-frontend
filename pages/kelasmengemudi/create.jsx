@@ -6,11 +6,9 @@ const Create = () => {
   const router = useRouter()
   const [namaKelas, setNamaKelas] = useState("")
   const [hargaKelas, setHargaKelas] = useState("")
-  const [jenisKendaraan, setJenisKendaraan] = useState("")
-  const [totalJamKursus, setTotalJamKursus] = useState("")
+  const [jenisKendaraan, setJenisKendaraan] = useState("MATIC")
   const [jumlahSesi, setJumlahSesi] = useState("")
-  const [instruktur, setInstruktur] = useState("")
-  const [nomorKendaraan, setNomorKendaraan] = useState("")
+  const [platNomorKendaraan, setPlatNomorKendaraan] = useState("")
   const [namaKendaraan, setNamaKendaraan] = useState("")
 
   const handleUpdate = async () => {
@@ -23,10 +21,8 @@ const Create = () => {
         namaKelas,
         hargaKelas,
         jenisKendaraan,
-        totalJamKursus,
         jumlahSesi,
-        instruktur,
-        nomorKendaraan,
+        platNomorKendaraan,
         namaKendaraan
     })
     const updateQuery = await fetch("https://rpl-backend-production.up.railway.app/v1/kelasmengemudi/create", {
@@ -55,7 +51,7 @@ const Create = () => {
         <div className="w-full mb-2">
           <span className="text-[#F875AA] font-bold text-2xl hover:cursor-pointer" onClick={(e) => {
             e.preventDefault()
-            router.push("/")
+            router.replace("/kelasmengemudi")
           }}>Back</span>
         </div>
         <h1 className="text-[#F875AA] font-extrabold text-5xl mb-20 text-center">Add Data Kelas</h1>
@@ -74,43 +70,34 @@ const Create = () => {
             <span className="h-min my-auto font-bold text-lg">Harga Kelas</span>
             <input value={hargaKelas} onChange={(e) => {
               setHargaKelas(e.target.value)
-            }} type="text" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
+            }} type="number" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
           </div>
           <div className="flex flex-row align-middle justify-between">
             <span className="h-min my-auto font-bold text-lg">Jenis Kendaraan</span>
-            <input value={jenisKendaraan} onChange={(e) => {
+            <select value={jenisKendaraan} onChange={(e) => {
               setJenisKendaraan(e.target.value)
-            }} type="tel" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
-          </div>
-          <div className="flex flex-row align-middle justify-between">
-            <span className="h-min my-auto font-bold text-lg">Total Jam Kursus</span>
-            <input value={totalJamKursus} onChange={(e) => {
-              setTotalJamKursus(e.target.value)
-            }} type="text" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
+            }}>
+              <option value="MATIC">Matic</option>
+              <option value="MANUAL">Manual</option>
+            </select>
           </div>
           <div className="flex flex-row align-middle justify-between">
             <span className="h-min my-auto font-bold text-lg">Jumlah Sesi</span>
             <input value={jumlahSesi} onChange={(e) => {
               setJumlahSesi(e.target.value)
-            }} type="tel" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
+            }} type="number" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
           </div>
           <div className="flex flex-row align-middle justify-between">
-            <span className="h-min my-auto font-bold text-lg">NIK Instruktur</span>
-            <input value={instruktur} onChange={(e) => {
-              setInstruktur(e.target.value)
-            }} type="tel" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
-          </div>
-          <div className="flex flex-row align-middle justify-between">
-            <span className="h-min my-auto font-bold text-lg">Nomor Kendaraan</span>
-            <input value={nomorKendaraan} onChange={(e) => {
-              setNomorKendaraan(e.target.value)
-            }} type="tel" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
+            <span className="h-min my-auto font-bold text-lg">Plat Nomor Kendaraan</span>
+            <input value={platNomorKendaraan} onChange={(e) => {
+              setPlatNomorKendaraan(e.target.value)
+            }} type="text" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
           </div>
           <div className="flex flex-row align-middle justify-between">
             <span className="h-min my-auto font-bold text-lg">Nama Kendaraan</span>
             <input value={namaKendaraan} onChange={(e) => {
               setNamaKendaraan(e.target.value)
-            }} type="tel" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
+            }} type="text" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
           </div>
 
           <input type="submit" className="bg-[#F875AA] px-8 py-3 text-xl font-bold text-white rounded-xl mx-auto" value={"Simpan"} />

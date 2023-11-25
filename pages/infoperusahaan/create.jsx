@@ -62,7 +62,10 @@ const Create = ({ propertyWebsite }) => {
                 question: e.target.value,
                 answer: faq.answer
               })
-            }} type="tel" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
+            }} type="text" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
+          </div>
+          <div>
+            <span className="text-[#16A4FF]">*) Minimum 10 karakter</span>
           </div>
           <div className="flex flex-row align-middle justify-between">
             <span className="h-min my-auto font-bold text-lg">Answer</span>
@@ -72,6 +75,9 @@ const Create = ({ propertyWebsite }) => {
                 answer: e.target.value
               })
             }} type="text" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
+          </div>
+          <div>
+            <span className="text-[#16A4FF]">*) Minimum 10 karakter</span>
           </div>
           <input type="submit" className="bg-[#F875AA] px-8 py-3 text-xl font-bold text-white rounded-xl mx-auto" value={"Simpan"} />
         </form>
