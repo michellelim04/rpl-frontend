@@ -120,12 +120,7 @@ const Edit = () => {
           </div>
           <div className="flex flex-row align-middle justify-between">
             <span className="h-min my-auto font-bold text-lg">Jenis Kendaraan</span>
-            <select value={jenisKendaraan} onChange={(e) => {
-              setJenisKendaraan(e.target.value)
-            }}>
-              <option value="MATIC">Matic</option>
-              <option value="MANUAL">Manual</option>
-            </select>
+            <input disabled value={jenisKendaraan} type="text" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
           </div>
           <div className="flex flex-row align-middle justify-between">
             <span className="h-min my-auto font-bold text-lg">Plat Nomor Kendaraan</span>
@@ -135,9 +130,7 @@ const Edit = () => {
           </div>
           <div className="flex flex-row align-middle justify-between">
             <span className="h-min my-auto font-bold text-lg">Nama Kendaraan</span>
-            <input value={namaKendaraan} onChange={(e) => {
-              setNamaKendaraan(e.target.value)
-            }} type="text" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
+            <input disabled value={namaKendaraan} type="text" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
           </div>
           <input type="submit" className="bg-[#F875AA] px-8 py-3 text-xl font-bold text-white rounded-xl mx-auto" value={"Simpan"} />
         </form>
