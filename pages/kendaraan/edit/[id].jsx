@@ -113,7 +113,9 @@ const Edit = () => {
           </div>
           <div className="flex flex-row align-middle justify-between">
             <span className="h-min my-auto font-bold text-lg">Tanggal Terakhir Service Kendaraan</span>
-            <input value={tanggalTerakhirService} onChange={(e) => {
+            <input value={new Date(tanggalTerakhirService).toLocaleDateString("sv-SE",{
+              dateStyle:"short"
+            }).split("/").join("-")} onChange={(e) => {
               setTanggalTerakhirService(e.target.value)
             }} type="date" className="drop-shadow-xl w-2/4 p-2 rounded-xl" />
           </div>

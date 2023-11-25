@@ -115,7 +115,9 @@ const Index = () => {
                 <td className="p-6 border border-[#F875AA] bg-white">{row.namaKendaraan}</td>
                 <td className="p-6 border border-[#F875AA] bg-white">{row.jenisTransmisi}</td>
                 <td className="p-6 border border-[#F875AA] bg-white">{row.jumlahKilometer}</td>
-                <td className="p-6 border border-[#F875AA] bg-white">{row.tanggalTerakhirService}</td>
+                <td className="p-6 border border-[#F875AA] bg-white">{new Date(row.tanggalTerakhirService).toLocaleDateString("id-ID",{
+                  dateStyle:"long"
+                })}</td>
                 <td className="p-6 border border-[#F875AA] bg-white">{row.statusKetersediaan}</td>
                 <td className="p-6 border border-[#F875AA] bg-white">{row.statusKendaraan}</td>
                 <td className="px-2 flex flex-col align-middle justify-evenly space-y-2 ">
