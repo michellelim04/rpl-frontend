@@ -12,7 +12,7 @@ export default function InformasiPerusahaan({ propertyWebsite }) {
   const saveDeskripsi = () => {
     const token = window.localStorage.getItem("token")
     if (token === undefined || token === null) {
-      window.location.replace("/")
+      window.location.replace("/infoperusahaan")
       return;
     }
     fetch("https://rpl-backend-production.up.railway.app/v1/property/description", {
