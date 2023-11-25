@@ -12,6 +12,8 @@ const Edit = () => {
   const [alamat, setAlamat] = useState("")
   const [statusPelanggan, setStatusPelanggan] = useState("")
   const [adminKursus, setAdminKursus] = useState("")
+  const [tanggalPendaftaran, setTanggalPendaftaran] = useState("")
+
 
   const handleUpdate = async () => {
     const token = window.localStorage.getItem("token")
@@ -26,7 +28,8 @@ const Edit = () => {
       noWA,
       alamat,
       statusPelanggan,
-      adminKursus
+      adminKursus,
+      tanggalPendaftaran,
     })
     const updateQuery = await fetch("https://rpl-backend-production.up.railway.app/v1/calonpelanggan/update/" + router.query.id, {
       method: "PATCH",
@@ -75,6 +78,7 @@ const Edit = () => {
       setAlamat(responsejson.data.alamat)
       setStatusPelanggan(responsejson.data.statusPelanggan)
       setAdminKursus(responsejson.data.adminKursus)
+      setTanggalPendaftaran(responsejson.data.tanggalPendaftaran)
     })
     //eslint-disable-next-line
   }, [router.isReady])
@@ -141,6 +145,13 @@ const Edit = () => {
             <input value={adminKursus} onChange={(e) => {
               setAdminKursus(e.target.value)
             }} type="number" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
+          </div>
+          <div className="flex flex-row align-middle justify-between">
+            <span className="h-min my-auto font-bold text-lg">Tanggal Pendaftaran</span>
+            <input disabled value={new Date(tanggalPendaftaran).toLocaleDateString("sv-SE",{
+              dateStyle:"short"
+            }).split("/").join("-")} 
+            type="date" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
           </div>
           <input type="submit" className="bg-[#F875AA] px-8 py-3 text-xl font-bold text-white rounded-xl mx-auto hover:cursor-pointer" value={"Simpan"} />
         </form>

@@ -49,6 +49,7 @@ const Edit = () => {
   }
 
   useEffect(() => {
+    if (!router.isReady) return
     const token = window.localStorage.getItem("token")
     if (token === undefined || token === null) {
       window.location.replace("/auth/login")
@@ -74,7 +75,8 @@ const Edit = () => {
       setPlatNomorKendaraan(responsejson.data.platNomorKendaraan)
       setNamaKendaraan(responsejson.data.namaKendaraan)
     })
-  }, [])
+    //eslint-disable-next-line
+  }, [router.isReady])
   return <>
     <Template>
       <main className="min-h-screen px-14 py-5 bg-[#FFF6F6]">
