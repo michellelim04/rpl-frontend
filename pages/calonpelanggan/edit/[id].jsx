@@ -29,7 +29,6 @@ const Edit = () => {
       alamat,
       statusPelanggan,
       adminKursus,
-      tanggalPendaftaran,
     })
     const updateQuery = await fetch("https://rpl-backend-production.up.railway.app/v1/calonpelanggan/update/" + router.query.id, {
       method: "PATCH",
@@ -151,7 +150,7 @@ const Edit = () => {
             <input disabled value={new Date(tanggalPendaftaran).toLocaleDateString("sv-SE",{
               dateStyle:"short"
             }).split("/").join("-")} 
-            type="date" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
+            type="date" className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
           </div>
           <input type="submit" className="bg-[#F875AA] px-8 py-3 text-xl font-bold text-white rounded-xl mx-auto hover:cursor-pointer" value={"Simpan"} />
         </form>
