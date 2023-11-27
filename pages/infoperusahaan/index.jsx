@@ -66,8 +66,8 @@ export default function InformasiPerusahaan({ propertyWebsite }) {
   useEffect(() => {
     const token = window.localStorage.getItem("token")
     if (token === undefined || token === null) {
-      window.location.replace("/")
-      return;
+      window.location.replace("/auth/login")
+      return
     }
     fetch("https://rpl-backend-production.up.railway.app/v1/property").then(async (response) => {
       const responsejson = await response.json()
