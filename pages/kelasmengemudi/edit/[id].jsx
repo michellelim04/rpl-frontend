@@ -22,10 +22,8 @@ const Edit = () => {
     const body = JSON.stringify({
       namaKelas,
       hargaKelas,
-      jenisKendaraan,
       jumlahSesi,
-      platNomorKendaraan,
-      namaKendaraan
+      platNomorKendaraan
     })
     const updateQuery = await fetch("https://rpl-backend-production.up.railway.app/v1/kelasmengemudi/update/" + router.query.id, {
       method: "PATCH",
