@@ -106,6 +106,7 @@ const Index = () => {
               <th className="bg-[#F875AA] p-2 border border-[#F875AA]">Alamat</th>
               <th className="bg-[#F875AA] p-2 border border-[#F875AA]">Status Pelanggan</th>
               <th className="bg-[#F875AA] p-2 border border-[#F875AA]">Admin Kursus</th>
+              <th className="bg-[#F875AA] p-2 border border-[#F875AA]">Tanggal Pendaftaran</th>
               <th className=""></th>
             </tr>
           </thead>
@@ -120,6 +121,9 @@ const Index = () => {
                 <td className="p-6 border border-[#F875AA] bg-white">{row.alamat}</td>
                 <td className="p-6 border border-[#F875AA] bg-white">{row.statusPelanggan}</td>
                 <td className="p-6 border border-[#F875AA] bg-white">{row.adminKursus}</td>
+                <td className="p-6 border border-[#F875AA] bg-white">{new Date(row.tanggalPendaftaran).toLocaleDateString("id-ID",{
+                  dateStyle:"long"
+                })}</td>
                 <td className="px-2 flex flex-col align-middle justify-evenly space-y-2 ">
                   <button className="bg-[#AEDEFC] p-1 rounded-lg" onClick={(e) => {
                     e.preventDefault();

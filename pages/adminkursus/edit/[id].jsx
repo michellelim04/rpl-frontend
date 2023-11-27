@@ -18,7 +18,7 @@ const Edit = () => {
     }
     const body = JSON.stringify({
       username,
-      password
+      password: password || undefined
     })
     const updateQuery = await fetch("https://rpl-backend-production.up.railway.app/v1/adminkursus/update/" + router.query.id, {
       method: "PATCH",
@@ -42,6 +42,7 @@ const Edit = () => {
   }
 
   useEffect(() => {
+    if (!router.isReady) return;
     const token = window.localStorage.getItem("token")
     if (token === undefined || token === null) {
       window.location.replace("/auth/login")
@@ -63,7 +64,7 @@ const Edit = () => {
       setpassword_hash(responsejson.data.password_hash)
     })
     //eslint-disable-next-line
-  }, [])
+  }, [router.isReady])
   return <>
     <Template>
       <main className="min-h-screen px-14 py-5 bg-[#FFF6F6]">
@@ -79,6 +80,7 @@ const Edit = () => {
           handleUpdate()
           return;
         }}>
+
           <div className="flex flex-row align-middle justify-between">
             <span className="h-min my-auto font-bold text-lg">user_id</span>
             <input disabled value={user_id} type="tel" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
@@ -87,13 +89,13 @@ const Edit = () => {
             <span className="h-min my-auto font-bold text-lg">Username</span>
             <input value={username} onChange={(e) => {
               setusername(e.target.value)
-            }} type="text"  className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
+            }} type="text" className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
           </div>
           <div className="flex flex-row align-middle justify-between">
             <span className="h-min my-auto font-bold text-lg">Password</span>
             <input value={password} onChange={(e) => {
               setpassword(e.target.value)
-            }} type="password"  className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
+            }} type="password" className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
           </div>
 
           <input type="submit" className="bg-[#F875AA] px-8 py-3 text-xl font-bold text-white rounded-xl mx-auto" value={"Simpan"} />

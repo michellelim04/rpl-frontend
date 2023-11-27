@@ -30,14 +30,32 @@ const Template = ({ children }) => {
   return <>
     <header className="flex flex-row align-middle justify-between bg-[#AEDEFC] px-10">
       <div className="flex flex-row align-middle justify-center space-x-3">
-        <Image src="/logo.png" alt="Main Logo" width={100} height={100} />
+        <Image className="hover:cursor-pointer" src="/logo.png" alt="Main Logo" width={100} height={100} onClick={()=>
+        router.push("/")}/>
         <span className="h-min my-auto font-bold text-xl">SISTEM MANAJEMEN KURSUS MENGEMUDI RPL</span>
       </div>
       <div className="flex flex-row align-middle justify-center space-x-6">
         {userObject === null && <span className="h-min my-auto font-semibold">Login as Admin Kursus/Owner?</span>}
         {userObject !== null && <span className="h-min my-auto font-semibold">Logged in as {userObject.tipe_user}</span>}
         {userObject === null && <button className="bg-[#F875AA] h-1/2 w-28 rounded-2xl font-bold text-white text-xl  my-auto p-2 " onClick={handleLogin}>Log In</button>}
-        {userObject !== null && <button className="bg-[#F875AA] h-1/2 w-28 rounded-2xl font-bold text-white text-xl  my-auto p-2 " onClick={handleLogout}>Log Out</button>}
+        {userObject !== null && (
+          <>
+          <button className="bg-[#F875AA] h-1/2 w-30 rounded-2xl font-bold text-white text-xl  my-auto p-2 " onClick={(e)=>{
+            e.preventDefault()
+            if (userObject.tipe_user === "OWNER"){
+              router.push("/dashboard/owner")
+              return
+            }
+            if (userObject.tipe_user === "ADMIN"){
+              router.push("/dashboard/admin")
+              return
+            } 
+            return
+          }}>Dashboard</button>
+          <button className="bg-[#F875AA] h-1/2 w-30 rounded-2xl font-bold text-white text-xl  my-auto p-2 " onClick={handleLogout}>Log Out</button>
+          </>
+
+        )}
       </div>
     </header >
     {children}

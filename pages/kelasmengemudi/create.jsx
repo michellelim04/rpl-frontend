@@ -6,10 +6,8 @@ const Create = () => {
   const router = useRouter()
   const [namaKelas, setNamaKelas] = useState("")
   const [hargaKelas, setHargaKelas] = useState("")
-  const [jenisKendaraan, setJenisKendaraan] = useState("MATIC")
   const [jumlahSesi, setJumlahSesi] = useState("")
   const [platNomorKendaraan, setPlatNomorKendaraan] = useState("")
-  const [namaKendaraan, setNamaKendaraan] = useState("")
 
   const handleUpdate = async () => {
     const token = window.localStorage.getItem("token")
@@ -20,10 +18,8 @@ const Create = () => {
     const body = JSON.stringify({
         namaKelas,
         hargaKelas,
-        jenisKendaraan,
         jumlahSesi,
         platNomorKendaraan,
-        namaKendaraan
     })
     const updateQuery = await fetch("https://rpl-backend-production.up.railway.app/v1/kelasmengemudi/create", {
       method: "POST",
@@ -73,15 +69,6 @@ const Create = () => {
             }} type="number" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
           </div>
           <div className="flex flex-row align-middle justify-between">
-            <span className="h-min my-auto font-bold text-lg">Jenis Kendaraan</span>
-            <select value={jenisKendaraan} onChange={(e) => {
-              setJenisKendaraan(e.target.value)
-            }}>
-              <option value="MATIC">Matic</option>
-              <option value="MANUAL">Manual</option>
-            </select>
-          </div>
-          <div className="flex flex-row align-middle justify-between">
             <span className="h-min my-auto font-bold text-lg">Jumlah Sesi</span>
             <input value={jumlahSesi} onChange={(e) => {
               setJumlahSesi(e.target.value)
@@ -91,12 +78,6 @@ const Create = () => {
             <span className="h-min my-auto font-bold text-lg">Plat Nomor Kendaraan</span>
             <input value={platNomorKendaraan} onChange={(e) => {
               setPlatNomorKendaraan(e.target.value)
-            }} type="text" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
-          </div>
-          <div className="flex flex-row align-middle justify-between">
-            <span className="h-min my-auto font-bold text-lg">Nama Kendaraan</span>
-            <input value={namaKendaraan} onChange={(e) => {
-              setNamaKendaraan(e.target.value)
             }} type="text" required className="drop-shadow-xl w-2/3 p-2 rounded-xl" />
           </div>
 

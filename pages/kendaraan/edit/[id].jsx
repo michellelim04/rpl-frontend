@@ -46,6 +46,7 @@ const Edit = () => {
   }
 
   useEffect(() => {
+    if (!router.isReady) return;
     const token = window.localStorage.getItem("token")
     if (token === undefined || token === null) {
       window.location.replace("/auth/login")
@@ -71,7 +72,7 @@ const Edit = () => {
       setStatusKendaraan(responsejson.data.statusKendaraan)
     })
     //eslint-disable-next-line
-  }, [])
+  }, [router.isReady])
   return <>
     <Template>
       <main className="min-h-screen px-14 py-5 bg-[#FFF6F6]">
@@ -112,7 +113,9 @@ const Edit = () => {
           </div>
           <div className="flex flex-row align-middle justify-between">
             <span className="h-min my-auto font-bold text-lg">Tanggal Terakhir Service Kendaraan</span>
-            <input value={tanggalTerakhirService} onChange={(e) => {
+            <input value={new Date(tanggalTerakhirService).toLocaleDateString("sv-SE",{
+              dateStyle:"short"
+            }).split("/").join("-")} onChange={(e) => {
               setTanggalTerakhirService(e.target.value)
             }} type="date" className="drop-shadow-xl w-2/4 p-2 rounded-xl" />
           </div>
